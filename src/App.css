@@ -1,0 +1,42 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.perfil {
+  text-align: center;
+}
+
+.perfil img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.secao {
+  margin-top: 20px;
+}
+
+h1, h2 {
+  color: #56070c;
+}
+
+p, li {
+  color: #555;
+}
+
+hr{
+  margin: 20px 0;
+  border: 1px solid #56070c;
+}
