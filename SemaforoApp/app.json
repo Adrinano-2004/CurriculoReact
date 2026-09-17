@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "SemaforoApp",
+    "slug": "semaforo-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#1e1e1e"
+    },
+    "android": {
+      "package": "com.seunome.semaforoapp",
+      "adaptiveIcon": {
+        "backgroundColor": "#1e1e1e"
+      }
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
