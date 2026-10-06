@@ -1,0 +1,260 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Vagou — design system
+   Inspirado na referência: fundo cinza-claro com brilhos suaves,
+   cartões foscos, botões em pílula, títulos leves em duas cores,
+   números em serifa com centavos em cinza, gráficos em "código de
+   barras" e cor só para estado (verde ok / vermelho alerta).
+---------------------------------------------------------------- */
+
+@theme {
+  --color-bg: #f2f2f1;
+  --color-paper: #ffffff;
+  --color-tile: #f7f7f6;
+  --color-ink: #141414;
+  --color-ink-2: #414140;
+  --color-muted: #8a8a88;
+  --color-muted-2: #b4b4b1;
+  --color-line: #e6e6e3;
+  --color-dark: #2a2a29;
+  --color-ok: #38bc37;
+  --color-ok-soft: #e8f6e8;
+  --color-ok-ink: #23862a;
+  --color-alert: #f44336;
+  --color-alert-soft: #fde9e7;
+  --color-alert-ink: #c6362a;
+  --color-warn-soft: #fff3da;
+  --color-warn-ink: #9a6a00;
+  --color-peach: #f6b79a;
+  --color-peach-soft: #fbe3d6;
+
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Newsreader", ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --radius-card: 22px;
+  --radius-tile: 14px;
+  --shadow-soft: 0 20px 50px rgba(30, 30, 30, 0.07);
+  --shadow-pop: 0 18px 40px rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-bg text-ink font-sans;
+    background:
+      radial-gradient(900px 520px at 8% -4%, #ffffff 0%, rgba(255, 255, 255, 0) 70%),
+      radial-gradient(760px 520px at 100% 100%, rgba(246, 183, 154, 0.22) 0%, rgba(246, 183, 154, 0) 70%),
+      radial-gradient(640px 460px at 92% 0%, rgba(205, 215, 232, 0.45) 0%, rgba(205, 215, 232, 0) 70%),
+      var(--color-bg);
+    background-attachment: fixed;
+    min-height: 100dvh;
+  }
+  ::selection {
+    background: #e7e2db;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+@layer components {
+  /* superfícies */
+  .card {
+    @apply bg-paper rounded-[var(--radius-card)];
+  }
+  .glass {
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(18px);
+  }
+  .tile {
+    @apply bg-tile rounded-[var(--radius-tile)];
+  }
+
+  /* tipografia */
+  .sec {
+    @apply text-[15px] text-muted;
+  }
+  .title {
+    @apply font-normal tracking-[-0.025em] text-ink leading-[1.08];
+  }
+  .title .g,
+  .g {
+    color: var(--color-muted-2);
+  }
+  .num {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    font-variant-numeric: lining-nums;
+  }
+  .label {
+    @apply text-[12px] text-muted;
+  }
+
+  /* botões em pílula */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-[18px] py-[10px] text-[14px] font-medium transition select-none whitespace-nowrap;
+  }
+  .btn:disabled {
+    @apply opacity-40 cursor-not-allowed;
+  }
+  .btn-dark {
+    @apply bg-dark text-white hover:bg-black;
+  }
+  .btn-light {
+    @apply bg-paper text-ink border border-line hover:border-muted-2;
+  }
+  .btn-ghost {
+    @apply text-ink-2 hover:bg-white/70;
+  }
+  .btn-danger {
+    @apply bg-alert-soft text-alert-ink hover:bg-[#fbd9d5];
+  }
+  .btn-lg {
+    @apply px-6 py-[14px] text-[16px];
+  }
+  .btn-sm {
+    @apply px-3 py-[6px] text-[12px];
+  }
+
+  /* pílulas de estado */
+  .pill {
+    @apply inline-flex items-center gap-1 rounded-full px-[9px] py-[3px] text-[11.5px] font-semibold whitespace-nowrap;
+  }
+  .pill-ok {
+    @apply bg-ok-soft text-ok-ink;
+  }
+  .pill-alert {
+    @apply bg-alert-soft text-alert-ink;
+  }
+  .pill-warn {
+    @apply bg-warn-soft text-warn-ink;
+  }
+  .pill-n {
+    @apply bg-[#f1f1ef] text-ink-2;
+  }
+  .pill-dark {
+    @apply bg-dark text-white;
+  }
+
+  /* etiqueta com bolinha */
+  .tag {
+    @apply inline-flex items-center gap-2 rounded-full bg-paper px-[14px] py-[7px] text-[13px] font-medium;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  .tag::before {
+    content: "";
+    @apply size-[7px] rounded-full bg-alert;
+  }
+  .tag.ok::before {
+    @apply bg-ok;
+  }
+  .tag.dark::before {
+    @apply bg-dark;
+  }
+
+  /* chip de filtro */
+  .chip {
+    @apply inline-flex items-center rounded-full border border-line px-3 py-[5px] text-[12.5px] font-medium text-ink-2 bg-paper hover:border-muted-2 transition;
+  }
+  .chip[data-on="true"] {
+    @apply bg-dark text-white border-dark;
+  }
+
+  /* campos */
+  .input {
+    @apply w-full rounded-[12px] border border-line bg-paper px-3 py-[10px] text-[14px] outline-none transition placeholder:text-muted-2;
+  }
+  .input:focus {
+    @apply border-ink-2;
+    box-shadow: 0 0 0 3px rgba(20, 20, 20, 0.06);
+  }
+
+  /* tecla */
+  .kbd {
+    @apply inline-flex items-center justify-center min-w-[22px] h-[22px] rounded-full border border-line bg-paper px-[6px] text-[10px] font-semibold text-muted;
+  }
+
+  /* placa padrão Mercosul */
+  .plate {
+    @apply inline-flex flex-col overflow-hidden rounded-[4px] border-[1.5px] border-[#222] bg-white leading-none text-ink;
+  }
+  .plate::before {
+    content: "BRASIL";
+    background: #1f47a0;
+    color: #fff;
+    font-size: 5.5px;
+    letter-spacing: 0.22em;
+    text-align: center;
+    padding: 1.5px 0;
+    font-weight: 600;
+  }
+  .plate > span {
+    @apply font-semibold tracking-[0.08em] px-[6px] py-[3px] text-[11.5px];
+  }
+  .plate.md::before {
+    font-size: 7px;
+    padding: 2px 0;
+  }
+  .plate.md > span {
+    @apply text-[17px] px-[10px] py-[5px];
+  }
+  .plate.lg {
+    @apply border-2 rounded-[6px];
+  }
+  .plate.lg::before {
+    font-size: 9px;
+    padding: 3px 0;
+  }
+  .plate.lg > span {
+    @apply text-[32px] px-[16px] pt-[6px] pb-[7px];
+  }
+
+  /* gráfico em código de barras */
+  .bars {
+    @apply flex h-full items-end gap-[2px];
+  }
+  .bars > i {
+    @apply flex-1 rounded-[1px] bg-[#d8d8d5] min-h-[2px];
+  }
+  .bars > i.k {
+    @apply bg-dark;
+  }
+  .bars > i.r {
+    @apply bg-alert;
+  }
+
+  .row {
+    @apply flex items-center justify-between gap-3 border-b border-[#f0f0ee] py-[10px] last:border-b-0;
+  }
+
+  .scroll-soft {
+    scrollbar-width: thin;
+    scrollbar-color: #d6d6d3 transparent;
+  }
+}
+
+@media print {
+  body {
+    background: #fff !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
