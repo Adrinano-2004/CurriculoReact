@@ -1,0 +1,20 @@
+{
+  "name": "skarlo-automacao",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bot de WhatsApp com Claude e prospecção de clientes para a Skarlo",
+  "type": "module",
+  "engines": {
+    "node": ">=20.6"
+  },
+  "scripts": {
+    "bot": "node --env-file=.env whatsapp-bot/server.js",
+    "leads": "node --env-file=.env prospeccao/buscar-leads.js",
+    "abordagens": "node --env-file=.env prospeccao/gerar-abordagens.js",
+    "check": "node --check whatsapp-bot/server.js && node --check whatsapp-bot/claude.js && node --check whatsapp-bot/whatsapp.js && node --check whatsapp-bot/conversas.js && node --check prospeccao/buscar-leads.js && node --check prospeccao/gerar-abordagens.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.2.0",
+    "express": "^5.3.0"
+  }
+}

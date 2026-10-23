@@ -1,0 +1,8 @@
+[
+  { "busca": "dentist", "local": "Miami, FL, USA" },
+  { "busca": "law firm", "local": "Houston, TX, USA" },
+  { "busca": "restaurant", "local": "Lisboa, Portugal" },
+  { "busca": "clínica de estética", "local": "São Paulo, SP, Brasil" },
+  { "busca": "gimnasio", "local": "Ciudad de México, México" },
+  { "busca": "pet shop", "local": "Orlando, FL, USA" }
+]
