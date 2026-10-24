@@ -102,45 +102,48 @@ Copie o endereço `https://xxxx.trycloudflare.com` que aparecer.
 
 ## Parte 2: Prospecção mundial
 
-### 2.1 Chave do Google Maps
+### 2.1 Chave do Google Maps (grátis dentro da cota)
 1. https://console.cloud.google.com → crie um projeto "Skarlo".
 2. **APIs e serviços → Biblioteca** → ative **Places API (New)**.
-3. **Credenciais → Criar credencial → Chave de API** → cole em `GOOGLE_PLACES_API_KEY`.
-4. Cadastre o faturamento. O Google costuma dar uma cota mensal gratuita, que cobre milhares de buscas para começar. Confira os valores atuais na página de preços da Places API.
+3. **Credenciais → Criar credencial → Chave de API** → cole em `GOOGLE_PLACES_API_KEY` no `.env`.
+4. O Google pede um cartão no faturamento, mas dá uma **cota mensal gratuita**. Confira o valor atual na página de preços da Places API.
+5. **Trava para nunca ser cobrado:** em **APIs e serviços → Places API (New) → Cotas**, limite as solicitações de *Text Search* **por dia** (ex: 30). Quando a cota do dia acaba, o programa avisa e para. No dia seguinte, rode o mesmo comando, que ele **continua de onde parou**.
 
-### 2.2 Escolher onde procurar
-Edite `prospeccao/alvos.json` com os ramos e cidades que quiser, em qualquer país. Escreva o ramo no idioma local:
-```json
-[
-  { "busca": "dentist", "local": "Miami, FL, USA" },
-  { "busca": "restaurante", "local": "Lisboa, Portugal" },
-  { "busca": "abogado", "local": "Madrid, España" }
-]
-```
-Ramos que costumam comprar site com automação: dentistas, clínicas de estética, advogados, contadores, academias, salões/barbearias, pet shops, imobiliárias, restaurantes, oficinas, escolas de idiomas, fotógrafos.
+### 2.2 Onde procurar: listas prontas
+| Arquivo | Região | Idioma das mensagens |
+|---|---|---|
+| `alvos-juiz-de-fora.json` | Juiz de Fora, 41 ramos | português |
+| `alvos-brasil.json` | 15 cidades do Brasil, 10 ramos | português |
+| `alvos-america-latina.json` | 15 cidades de 12 países | espanhol |
+| `alvos-eua.json` | 12 cidades dos EUA | inglês |
+| `alvos.json` | lista mista de exemplo | conforme o país |
+
+Para editar, abra o arquivo e acrescente ou tire ramos e cidades. Escreva o ramo no idioma local.
+`"paginas": 1` traz até 20 empresas por busca, `2` até 40 e `3` até 60.
 
 ### 2.3 Buscar os leads
 ```bash
-npm run leads
-# ou uma busca avulsa:
-npm run leads -- "barbershop" "Austin, TX, USA"
+npm run leads -- alvos-juiz-de-fora.json
+npm run leads -- alvos-brasil.json
+npm run leads -- "barbershop" "Austin, TX, USA"   # uma busca avulsa
 ```
-Gera `dados/leads.csv` (abra no Excel ou Google Planilhas), já ordenado pela **pontuação**:
+Todas as regiões vão para a **mesma planilha**, `dados/leads.csv`. Ela abre direto no Excel em português, separada por `;`, já ordenada pela **pontuação**:
 - `sem_site`: não tem site, ou só tem Instagram/Facebook/Linktree. **Melhor tipo de lead.**
 - `site_fora_do_ar`: o site não abre.
 - `site_fraco`: sem HTTPS, sem versão de celular, sem WhatsApp, sem agendamento, desatualizado...
 - `site_ok`: provavelmente não precisa de você agora.
 
-Empresas bem avaliadas e com muitas avaliações sobem na lista, porque são negócios ativos que têm dinheiro e estão perdendo clientes.
+Use a coluna **`status`** para anotar o andamento: `enviado`, `respondeu`, `reuniao`, `fechou`, `nao`. Rodar de novo **mantém** o que você anotou. Só **feche o arquivo no Excel antes de rodar**.
 
-### 2.4 Gerar as abordagens com o Claude
+### 2.4 Gerar as abordagens
 ```bash
-npm run abordagens        # os 30 melhores leads
-npm run abordagens -- 100 # os 100 melhores
+npm run abordagens
 ```
-Gera `dados/abordagens.csv` com, para cada empresa: idioma, canal recomendado, o "gancho" usado, assunto e texto do e-mail, mensagem curta para DM e follow-up. **Nada é enviado sozinho**: você revisa e envia.
+- **Modo grátis** (sem chave do Claude): preenche modelos prontos com os dados reais de cada empresa (nome, nota no Google, problemas do site), em português, inglês ou espanhol, conforme o país. Escreve para **todos** os leads.
+- **Modo IA** (com chave): o Claude escreve cada mensagem do zero. Escreve para os 30 melhores, ou `npm run abordagens -- 100`. Também reescreve as que foram feitas no modo grátis.
 
-Custo: cerca de US$ 0,01 a 0,02 por abordagem.
+O resultado fica em `dados/abordagens.csv`, com canal recomendado, assunto, e-mail, mensagem curta para DM e follow-up. **Nada é enviado sozinho**: você revisa e envia.
+Para o seu número sair nas mensagens, preencha `whatsapp:` no `empresa.js`.
 
 ### 2.5 Enviar (rotina sugerida, 1h por dia)
 | Canal | Como | Quantos por dia |

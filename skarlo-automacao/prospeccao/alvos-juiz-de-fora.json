@@ -1,0 +1,14 @@
+{
+  "locais": ["Juiz de Fora, MG, Brasil"],
+  "paginas": 3,
+  "ramos": [
+    "dentista", "clínica odontológica", "clínica de estética", "salão de beleza", "barbearia",
+    "manicure e pedicure", "academia", "estúdio de pilates", "nutricionista", "psicólogo",
+    "fisioterapia", "clínica médica", "advogado", "escritório de contabilidade", "imobiliária",
+    "restaurante", "pizzaria", "hamburgueria", "cafeteria", "padaria", "confeitaria",
+    "pet shop", "clínica veterinária", "oficina mecânica", "lava jato", "autoescola",
+    "escola de idiomas", "escola infantil", "fotógrafo", "buffet de festas", "loja de roupas",
+    "ótica", "floricultura", "arquiteto", "marcenaria", "vidraçaria", "dedetizadora",
+    "loja de material de construção", "farmácia de manipulação", "hotel", "pousada"
+  ]
+}

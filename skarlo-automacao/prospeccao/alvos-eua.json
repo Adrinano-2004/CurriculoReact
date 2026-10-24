@@ -1,0 +1,12 @@
+{
+  "locais": [
+    "Miami, FL, USA", "Orlando, FL, USA", "Tampa, FL, USA", "Houston, TX, USA", "Dallas, TX, USA",
+    "Austin, TX, USA", "Atlanta, GA, USA", "Charlotte, NC, USA", "Phoenix, AZ, USA",
+    "Newark, NJ, USA", "Boston, MA, USA", "Framingham, MA, USA"
+  ],
+  "paginas": 2,
+  "ramos": [
+    "dentist", "med spa", "hair salon", "barbershop", "gym", "law firm",
+    "accountant", "real estate agency", "restaurant", "auto repair", "cleaning service", "landscaping"
+  ]
+}

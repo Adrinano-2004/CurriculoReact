@@ -1,7 +1,9 @@
-// Usa o Claude para escrever uma abordagem personalizada para cada lead encontrado.
+// Escreve uma abordagem personalizada para cada lead encontrado.
+//   - Com ANTHROPIC_API_KEY no .env: o Claude escreve cada mensagem (modo IA).
+//   - Sem a chave: preenche modelos prontos com os dados reais da empresa (modo grátis).
 //
 // Uso:
-//   npm run abordagens            -> escreve para os 30 melhores leads que ainda não têm abordagem
+//   npm run abordagens            -> modo IA: os 30 melhores leads sem abordagem; modo grátis: todos
 //   npm run abordagens -- 100     -> escreve para os 100 melhores
 //
 // Resultado: dados/abordagens.csv (assunto, e-mail, mensagem curta para Instagram/LinkedIn, follow-up).
@@ -13,6 +15,7 @@ import { fileURLToPath } from "node:url";
 import Anthropic from "@anthropic-ai/sdk";
 import { empresa } from "../empresa.js";
 import { paraCsv } from "./csv.js";
+import { escreverComModelo } from "./modelos.js";
 
 const aqui = path.dirname(fileURLToPath(import.meta.url));
 const ARQUIVO_LEADS = path.join(aqui, "..", "dados", "leads.json");
@@ -21,7 +24,9 @@ const ARQUIVO_CSV = path.join(aqui, "..", "dados", "abordagens.csv");
 const MODELO = "claude-opus-5-5";
 const EM_PARALELO = 3;
 
-const client = new Anthropic();
+const chaveClaude = process.env.ANTHROPIC_API_KEY ?? "";
+const MODO_IA = chaveClaude.startsWith("sk-ant-") && !chaveClaude.includes("...");
+let client; // só é criado no modo IA
 
 const ESQUEMA = {
   type: "object",
@@ -66,7 +71,8 @@ function descreverLead(lead) {
   ].join("\n");
 }
 
-async function escreverAbordagem(lead) {
+async function escreverComClaude(lead) {
+  client ??= new Anthropic();
   const resposta = await client.beta.messages.create({
     model: MODELO,
     max_tokens: 16000,
@@ -79,25 +85,29 @@ async function escreverAbordagem(lead) {
   if (resposta.stop_reason === "refusal") throw new Error("o modelo recusou este lead");
   const texto = resposta.content.find((b) => b.type === "text")?.text;
   if (!texto) throw new Error(`resposta sem texto (stop_reason: ${resposta.stop_reason})`);
-  return JSON.parse(texto);
+  return { origem: "ia", ...JSON.parse(texto) };
 }
 
 async function main() {
-  const limite = Number(process.argv[2]) || 30;
+  const limite = Number(process.argv[2]) || (MODO_IA ? 30 : Infinity); // grátis: todos
   const leads = JSON.parse(await fs.readFile(ARQUIVO_LEADS, "utf8"));
 
   const pendentes = leads
-    .filter((l) => l.statusSite !== "site_ok" && !l.abordagem)
+    // no modo IA, também reescreve as que foram feitas com modelo
+    .filter((l) => l.statusSite !== "site_ok" && (!l.abordagem || (MODO_IA && l.abordagem.origem !== "ia")))
     .sort((a, b) => b.pontuacao - a.pontuacao)
     .slice(0, limite);
-  console.log(`✍️  Escrevendo ${pendentes.length} abordagens...`);
+  console.log(
+    `✍️  Escrevendo ${pendentes.length} abordagens (${MODO_IA ? "modo IA, com Claude" : "modo grátis, com modelos"})...`,
+  );
+  const escrever = MODO_IA ? escreverComClaude : escreverComModelo;
 
   let feitos = 0;
   const fila = [...pendentes];
   async function trabalhador() {
     for (let lead = fila.shift(); lead; lead = fila.shift()) {
       try {
-        lead.abordagem = await escreverAbordagem(lead);
+        lead.abordagem = await escrever(lead);
         console.log(`   [${++feitos}/${pendentes.length}] ${lead.nome}`);
       } catch (erro) {
         console.error(`   ✗ ${lead.nome}: ${erro.message}`);

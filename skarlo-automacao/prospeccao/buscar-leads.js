@@ -2,7 +2,15 @@
 //
 // Uso:
 //   npm run leads                                   -> usa a lista prospeccao/alvos.json
+//   npm run leads -- alvos-juiz-de-fora.json        -> usa outra lista da pasta prospeccao
 //   npm run leads -- "dentist" "Miami, FL, USA"     -> uma busca só
+//   npm run leads -- alvos-brasil.json --refazer    -> refaz buscas que já foram feitas antes
+//
+// Cada busca feita fica anotada em dados/buscas-feitas.json e é pulada na próxima vez.
+// Assim, se a cota grátis do dia acabar, é só rodar de novo amanhã que continua de onde parou.
+//
+// Uma lista pode ser [{ "busca", "local" }, ...] ou { "ramos": [...], "locais": [...], "paginas": 1 }
+// (nesse caso busca cada ramo em cada local).
 //
 // Resultado: dados/leads.json e dados/leads.csv (abre no Excel / Google Planilhas).
 // Rodar de novo não duplica: empresas já encontradas são atualizadas.
@@ -10,14 +18,16 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { paraCsv } from "./csv.js";
+import { paraCsv, lerCsv } from "./csv.js";
 
 const aqui = path.dirname(fileURLToPath(import.meta.url));
 const PASTA_DADOS = path.join(aqui, "..", "dados");
 const ARQUIVO_JSON = path.join(PASTA_DADOS, "leads.json");
 const ARQUIVO_CSV = path.join(PASTA_DADOS, "leads.csv");
+const ARQUIVO_BUSCAS_FEITAS = path.join(PASTA_DADOS, "buscas-feitas.json");
 
 const PAGINAS_POR_BUSCA = 3; // 20 empresas por página -> até 60 por busca
+const SITES_EM_PARALELO = 10;
 
 const CAMPOS = [
   "places.id",
@@ -41,10 +51,12 @@ if (!process.env.GOOGLE_PLACES_API_KEY) {
   process.exit(1);
 }
 
-async function buscarNoMaps(busca, local) {
+class CotaEsgotada extends Error {}
+
+async function buscarNoMaps(busca, local, paginas) {
   const empresas = [];
   let pageToken;
-  for (let pagina = 0; pagina < PAGINAS_POR_BUSCA; pagina++) {
+  for (let pagina = 0; pagina < paginas; pagina++) {
     const resposta = await fetch("https://places.googleapis.com/v1/places:searchText", {
       method: "POST",
       headers: {
@@ -54,6 +66,7 @@ async function buscarNoMaps(busca, local) {
       },
       body: JSON.stringify({ textQuery: `${busca} in ${local}`, pageSize: 20, pageToken }),
     });
+    if (resposta.status === 429) throw new CotaEsgotada();
     if (!resposta.ok) throw new Error(`Places API ${resposta.status}: ${await resposta.text()}`);
     const dados = await resposta.json();
     empresas.push(...(dados.places ?? []));
@@ -114,28 +127,85 @@ function pontuar(lead) {
   return Math.round(base + reputacao + lead.problemas.length * 2);
 }
 
-async function lerLeadsExistentes() {
+async function lerJson(arquivo, padrao) {
   try {
-    return JSON.parse(await fs.readFile(ARQUIVO_JSON, "utf8"));
+    return JSON.parse(await fs.readFile(arquivo, "utf8"));
   } catch {
-    return [];
+    return padrao;
   }
 }
 
+async function lerLeadsExistentes() {
+  let leads = [];
+  try {
+    leads = JSON.parse(await fs.readFile(ARQUIVO_JSON, "utf8"));
+  } catch {
+    return [];
+  }
+  // A coluna "status" você edita na planilha: traz o que estiver no leads.csv de volta.
+  try {
+    const statusPorId = new Map(
+      lerCsv(await fs.readFile(ARQUIVO_CSV, "utf8")).map((linha) => [linha.id, linha.status]),
+    );
+    for (const lead of leads) if (statusPorId.get(lead.id)) lead.status = statusPorId.get(lead.id);
+  } catch (erro) {
+    if (erro.code === "EBUSY") {
+      console.error("Feche o leads.csv no Excel antes de rodar (ele bloqueia o arquivo).");
+      process.exit(1);
+    }
+  }
+  return leads;
+}
+
+async function lerAlvos(arquivo) {
+  const lista = JSON.parse(await fs.readFile(path.join(aqui, arquivo), "utf8"));
+  if (Array.isArray(lista)) return lista.map((a) => ({ paginas: PAGINAS_POR_BUSCA, ...a }));
+  return lista.locais.flatMap((local) =>
+    lista.ramos.map((busca) => ({ busca, local, paginas: lista.paginas ?? PAGINAS_POR_BUSCA })),
+  );
+}
+
+// Analisa vários sites ao mesmo tempo (cada um pode levar até 15 s).
+async function analisarTodos(empresas) {
+  const analises = new Array(empresas.length);
+  let proximo = 0;
+  async function trabalhador() {
+    while (proximo < empresas.length) {
+      const i = proximo++;
+      analises[i] = await analisarSite(empresas[i].websiteUri);
+    }
+  }
+  await Promise.all(Array.from({ length: SITES_EM_PARALELO }, trabalhador));
+  return analises;
+}
+
 async function main() {
-  const [buscaArg, localArg] = process.argv.slice(2);
-  const alvos = buscaArg
-    ? [{ busca: buscaArg, local: localArg || "" }]
-    : JSON.parse(await fs.readFile(path.join(aqui, "alvos.json"), "utf8"));
+  const refazer = process.argv.includes("--refazer");
+  const [arg1, arg2] = process.argv.slice(2).filter((a) => a !== "--refazer");
+  const alvos =
+    arg1 && !arg1.endsWith(".json")
+      ? [{ busca: arg1, local: arg2 || "", paginas: PAGINAS_POR_BUSCA }]
+      : await lerAlvos(arg1 || "alvos.json");
 
   const porId = new Map((await lerLeadsExistentes()).map((l) => [l.id, l]));
+  const feitas = new Set(await lerJson(ARQUIVO_BUSCAS_FEITAS, []));
 
-  for (const { busca, local } of alvos) {
-    console.log(`\n🔎 ${busca} - ${local}`);
-    const empresas = await buscarNoMaps(busca, local);
+  for (const [indice, { busca, local, paginas }] of alvos.entries()) {
+    const chave = `${busca} | ${local}`;
+    if (feitas.has(chave) && !refazer) continue;
+    console.log(`\n🔎 [${indice + 1}/${alvos.length}] ${busca} - ${local}`);
+    let empresas;
+    try {
+      empresas = await buscarNoMaps(busca, local, paginas);
+    } catch (erro) {
+      if (!(erro instanceof CotaEsgotada)) throw erro;
+      console.log("\n⏸️  A cota de buscas do Google acabou por hoje. Rode o mesmo comando amanhã: continua daqui.");
+      break;
+    }
+    const analises = await analisarTodos(empresas);
     let novos = 0;
-    for (const empresa of empresas) {
-      const analise = await analisarSite(empresa.websiteUri);
+    for (const [i, empresa] of empresas.entries()) {
+      const analise = analises[i];
       const lead = {
         id: empresa.id,
         nome: empresa.displayName?.text ?? "",
@@ -156,8 +226,18 @@ async function main() {
       porId.set(lead.id, { ...porId.get(lead.id), ...lead });
     }
     console.log(`   ${empresas.length} empresas, ${novos} novas`);
+    await salvar(porId); // salva a cada busca: se parar no meio, nada se perde
+    feitas.add(chave);
+    await fs.writeFile(ARQUIVO_BUSCAS_FEITAS, JSON.stringify([...feitas], null, 2));
   }
 
+  const leads = await salvar(porId);
+  const resumo = leads.reduce((c, l) => ({ ...c, [l.statusSite]: (c[l.statusSite] ?? 0) + 1 }), {});
+  console.log(`\n✅ ${leads.length} leads salvos em dados/leads.csv`, resumo);
+  console.log("Próximo passo: npm run abordagens");
+}
+
+async function salvar(porId) {
   const leads = [...porId.values()].sort((a, b) => b.pontuacao - a.pontuacao);
   await fs.mkdir(PASTA_DADOS, { recursive: true });
   await fs.writeFile(ARQUIVO_JSON, JSON.stringify(leads, null, 2));
@@ -165,13 +245,10 @@ async function main() {
     ARQUIVO_CSV,
     paraCsv(leads, [
       "pontuacao", "statusSite", "nome", "busca", "local", "telefone", "emails", "site",
-      "problemas", "nota", "avaliacoes", "endereco", "googleMaps", "status",
+      "problemas", "nota", "avaliacoes", "endereco", "googleMaps", "status", "id",
     ]),
   );
-
-  const resumo = leads.reduce((c, l) => ({ ...c, [l.statusSite]: (c[l.statusSite] ?? 0) + 1 }), {});
-  console.log(`\n✅ ${leads.length} leads salvos em dados/leads.csv`, resumo);
-  console.log("Próximo passo: npm run abordagens");
+  return leads;
 }
 
 main().catch((erro) => {

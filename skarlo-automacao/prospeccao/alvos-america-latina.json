@@ -1,0 +1,14 @@
+{
+  "locais": [
+    "Ciudad de México, México", "Guadalajara, México", "Monterrey, México",
+    "Bogotá, Colombia", "Medellín, Colombia", "Buenos Aires, Argentina", "Córdoba, Argentina",
+    "Santiago, Chile", "Lima, Perú", "Quito, Ecuador", "Montevideo, Uruguay",
+    "Asunción, Paraguay", "San José, Costa Rica", "Ciudad de Panamá, Panamá",
+    "Santo Domingo, República Dominicana"
+  ],
+  "paginas": 2,
+  "ramos": [
+    "dentista", "clínica estética", "barbería", "gimnasio", "abogado",
+    "contador", "inmobiliaria", "restaurante", "veterinaria", "escuela de idiomas"
+  ]
+}

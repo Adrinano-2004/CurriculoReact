@@ -1,0 +1,14 @@
+{
+  "locais": [
+    "Belo Horizonte, MG, Brasil", "Rio de Janeiro, RJ, Brasil", "São Paulo, SP, Brasil",
+    "Campinas, SP, Brasil", "Curitiba, PR, Brasil", "Florianópolis, SC, Brasil",
+    "Porto Alegre, RS, Brasil", "Brasília, DF, Brasil", "Goiânia, GO, Brasil",
+    "Salvador, BA, Brasil", "Recife, PE, Brasil", "Fortaleza, CE, Brasil",
+    "Petrópolis, RJ, Brasil", "Volta Redonda, RJ, Brasil", "Barbacena, MG, Brasil"
+  ],
+  "paginas": 2,
+  "ramos": [
+    "dentista", "clínica de estética", "barbearia", "academia", "advogado",
+    "escritório de contabilidade", "imobiliária", "restaurante", "pet shop", "clínica veterinária"
+  ]
+}

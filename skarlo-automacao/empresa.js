@@ -19,6 +19,9 @@ export const empresa = {
   // E-mail de contato
   email: "PREENCHER - ex: contato@skarlo.co",
 
+  // Número do WhatsApp da empresa (o americano), só números com DDI. Vai nas mensagens de prospecção.
+  whatsapp: "PREENCHER - ex: 13055551234",
+
   idiomasAtendidos: ["português", "inglês", "espanhol"],
 
   servicos: [
