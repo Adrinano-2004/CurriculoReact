@@ -3,7 +3,7 @@
 import crypto from "node:crypto";
 import express from "express";
 import { empresa } from "../empresa.js";
-import { enviarTexto, marcarComoLida } from "./whatsapp.js";
+import { enviarTexto, marcarComoLida, mesmoNumero } from "./whatsapp.js";
 import {
   carregarConversa,
   salvarConversa,
@@ -155,7 +155,7 @@ async function tratarMensagem(mensagem, nomeNoPerfil) {
   const texto = textoDaMensagem(mensagem);
   if (texto === null) return;
 
-  if (mensagem.from === DONO && texto.trim().toLowerCase().startsWith("/bot")) {
+  if (DONO && mesmoNumero(mensagem.from, DONO) && texto.trim().toLowerCase().startsWith("/bot")) {
     return tratarComandoDoDono(texto);
   }
 

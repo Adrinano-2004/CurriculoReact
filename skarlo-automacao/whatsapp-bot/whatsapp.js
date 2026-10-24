@@ -36,13 +36,37 @@ function dividirTexto(texto) {
   return partes;
 }
 
+// Celular brasileiro: o WhatsApp às vezes informa o número SEM o 9 (55 32 8888-7777)
+// e às vezes COM o 9 (55 32 9 8888-7777). Devolve as duas formas.
+export function formasDoNumero(numero) {
+  const n = String(numero).replace(/\D/g, "");
+  if (n.startsWith("55") && n.length === 12 && /[6-9]/.test(n[4])) return [n, `${n.slice(0, 4)}9${n.slice(4)}`];
+  if (n.startsWith("55") && n.length === 13 && n[4] === "9") return [n, `${n.slice(0, 4)}${n.slice(5)}`];
+  return [n];
+}
+
+export function mesmoNumero(a, b) {
+  const formasDeB = formasDoNumero(b);
+  return formasDoNumero(a).some((forma) => formasDeB.includes(forma));
+}
+
+// Lembra qual forma do número funcionou, para não errar de novo.
+const formaQueFunciona = new Map();
+
 export async function enviarTexto(para, texto) {
   for (const parte of dividirTexto(texto)) {
-    await chamarGraph({
-      to: para,
-      type: "text",
-      text: { body: parte, preview_url: true },
-    });
+    const corpo = { type: "text", text: { body: parte, preview_url: true } };
+    const formas = formasDoNumero(para);
+    const primeira = formaQueFunciona.get(formas[0]) ?? formas[0];
+    try {
+      await chamarGraph({ to: primeira, ...corpo });
+    } catch (erro) {
+      // 131030 = número fora da lista de teste (acontece com a forma sem/com o 9)
+      const outra = formas.find((f) => f !== primeira);
+      if (!outra || !String(erro.message).includes("131030")) throw erro;
+      await chamarGraph({ to: outra, ...corpo });
+      formaQueFunciona.set(formas[0], outra);
+    }
   }
 }
 
