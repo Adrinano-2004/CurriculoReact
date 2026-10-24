@@ -3,7 +3,6 @@
 import crypto from "node:crypto";
 import express from "express";
 import { empresa } from "../empresa.js";
-import { responder } from "./claude.js";
 import { enviarTexto, marcarComoLida } from "./whatsapp.js";
 import {
   carregarConversa,
@@ -15,12 +14,17 @@ import {
 const HORAS_PAUSA_APOS_TRANSFERIR = 24;
 const DONO = (process.env.DONO_WHATSAPP || "").replace(/\D/g, "");
 
-for (const variavel of ["ANTHROPIC_API_KEY", "WHATSAPP_TOKEN", "WHATSAPP_PHONE_NUMBER_ID", "WHATSAPP_VERIFY_TOKEN"]) {
+for (const variavel of ["WHATSAPP_TOKEN", "WHATSAPP_PHONE_NUMBER_ID", "WHATSAPP_VERIFY_TOKEN"]) {
   if (!process.env[variavel]) {
     console.error(`Falta a variável ${variavel} no arquivo .env`);
     process.exit(1);
   }
 }
+
+// Com chave do Claude -> atendimento com IA. Sem chave -> modo grátis (roteiro).
+const chaveClaude = process.env.ANTHROPIC_API_KEY ?? "";
+const MODO_IA = chaveClaude.startsWith("sk-ant-") && !chaveClaude.includes("...");
+const { responder } = await import(MODO_IA ? "./claude.js" : "./roteiro.js");
 if (!process.env.WHATSAPP_APP_SECRET) {
   console.warn("AVISO: WHATSAPP_APP_SECRET vazio - a assinatura das mensagens da Meta não será verificada.");
 }
@@ -189,4 +193,11 @@ async function tratarMensagem(mensagem, nomeNoPerfil) {
 }
 
 const porta = Number(process.env.PORT) || 3000;
-app.listen(porta, () => console.log(`Bot da ${empresa.nome} ouvindo na porta ${porta} (webhook: /webhook)`));
+app.listen(porta, () => {
+  console.log(`Bot da ${empresa.nome} ouvindo na porta ${porta} (webhook: /webhook)`);
+  console.log(
+    MODO_IA
+      ? "Modo: IA (Claude)"
+      : "Modo: GRÁTIS (roteiro, sem IA). Para ativar o Claude, coloque ANTHROPIC_API_KEY no .env",
+  );
+});

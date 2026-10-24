@@ -11,7 +11,7 @@
     "bot": "node --env-file=.env whatsapp-bot/server.js",
     "leads": "node --env-file=.env prospeccao/buscar-leads.js",
     "abordagens": "node --env-file=.env prospeccao/gerar-abordagens.js",
-    "check": "node --check whatsapp-bot/server.js && node --check whatsapp-bot/claude.js && node --check whatsapp-bot/whatsapp.js && node --check whatsapp-bot/conversas.js && node --check prospeccao/buscar-leads.js && node --check prospeccao/gerar-abordagens.js"
+    "check": "node --check whatsapp-bot/server.js && node --check whatsapp-bot/claude.js && node --check whatsapp-bot/roteiro.js && node --check whatsapp-bot/whatsapp.js && node --check whatsapp-bot/conversas.js && node --check prospeccao/buscar-leads.js && node --check prospeccao/gerar-abordagens.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.2.0",

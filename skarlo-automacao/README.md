@@ -30,8 +30,22 @@ Google Maps ──► buscar-leads ──► leads.csv ──► gerar-abordagen
 
 ## Parte 1: Bot do WhatsApp
 
-### 1.1 Chave do Claude
-1. Crie uma conta em https://console.anthropic.com
+### 1.1 Modo grátis ou modo com IA
+O bot tem **dois modos**, e ele escolhe sozinho pelo `.env`:
+
+| | Modo grátis (sem chave) | Modo IA (com chave do Claude) |
+|---|---|---|
+| Custo | US$ 0 | cerca de US$ 0,01 a 0,03 por resposta |
+| Como conversa | roteiro fixo: nome → empresa → cidade → site atual → o que precisa (menu 1 a 4) → prazo → orçamento | conversa livre, tira dúvidas, sugere automações para o ramo |
+| Idiomas | português, inglês, espanhol (pelo DDI e pelas palavras do cliente) | qualquer idioma |
+| Registra lead e te avisa | ✅ | ✅ |
+| "Falar com uma pessoa" / parar mensagens | ✅ | ✅ |
+
+Para usar o **modo grátis**, deixe `ANTHROPIC_API_KEY=` vazio no `.env`. Ao ligar, o terminal mostra `Modo: GRÁTIS`.
+Para passar para o **modo IA**, coloque a chave (passo abaixo) e reinicie o bot. As conversas continuam de onde pararam.
+
+**Chave do Claude (só para o modo IA):**
+1. Crie uma conta em https://platform.claude.com
 2. Em **Billing**, adicione créditos (US$ 5 já dá para testar bastante).
 3. Em **API Keys**, crie uma chave e cole no `.env` em `ANTHROPIC_API_KEY`.
 
@@ -82,7 +96,7 @@ Copie o endereço `https://xxxx.trycloudflare.com` que aparecer.
   - `/bot ativar 13055551234`: o bot volta a responder esse contato.
 - Tudo fica salvo em `dados/`: `conversas/` (histórico de cada contato) e `leads-whatsapp.json`.
 
-**Custo estimado:** cada resposta do bot custa em média US$ 0,01 a 0,03 no Claude. Cem conversas de 10 mensagens dão uns US$ 10 a 30 por mês.
+**Custo estimado:** no modo grátis, zero. No modo IA, cada resposta do bot custa em média US$ 0,01 a 0,03 no Claude. Cem conversas de 10 mensagens dão uns US$ 10 a 30 por mês.
 
 ---
 
