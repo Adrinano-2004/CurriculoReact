@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { I } from "@/components/icons";
 import { PhonePainel, PhonePatio, serie, TelaSaida, TelaSistema } from "@/components/mockups";
 import { Bars, Logo, Money, Plate } from "@/components/ui";
+import { Wordmark } from "@/components/brand";
 
 function Check({ children }: { children: ReactNode }) {
   return (
@@ -111,7 +112,7 @@ export default function Home() {
           <span className="size-1.5 rounded-full bg-alert" /> Sobre o Vagou
         </div>
         <p className="text-[26px] leading-snug tracking-[-0.01em] md:text-[34px]">
-          <span className="font-medium">vagou</span> nasceu olhando para estacionamentos que ainda usam sistemas antigos, de tela azul e códigos decorados.{" "}
+          <span className="font-medium">Vagou</span> nasceu olhando para estacionamentos que ainda usam sistemas antigos, de tela azul e códigos decorados.{" "}
           <span className="text-muted-2">Juntamos entrada, saída, caixa, mensalistas, lava-jato e relatórios em um sistema só, moderno e fácil de aprender.</span>
         </p>
         <div className="mt-12 grid gap-8 sm:grid-cols-3">
@@ -387,9 +388,10 @@ export default function Home() {
 
       {/* ---------------- rodapé ---------------- */}
       <footer className="px-3 pb-3 md:px-5 md:pb-5">
-        <div className="relative overflow-hidden rounded-[30px] bg-[linear-gradient(180deg,#8e8a84_0%,#5e5a55_45%,#3a3733_100%)] px-6 pb-10 pt-16 text-white md:px-12">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_300px_at_50%_40%,rgba(255,255,255,0.16),transparent_70%)]" />
-          <div className="relative text-center text-[110px] font-semibold leading-none tracking-[-0.06em] sm:text-[180px] md:text-[240px]">vagou</div>
+        <div className="relative overflow-hidden rounded-[30px] bg-ink px-6 pb-10 pt-16 text-white md:px-12">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_360px_at_90%_0%,rgba(246,183,154,0.35),transparent_70%)]" />
+          <div className="faixas pointer-events-none absolute -bottom-10 -left-10 h-48 w-80 opacity-[0.08]" />
+          <Wordmark className="relative mx-auto block w-full max-w-[1000px] text-white" style={{ height: "auto" }} />
           <div className="relative mt-12 grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
             <div>
               <div className="text-[30px] font-light">E aí, vamos conversar?</div>

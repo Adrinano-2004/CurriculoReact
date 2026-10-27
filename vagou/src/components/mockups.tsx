@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Bars, Money, Plate } from "./ui";
+import { Wordmark, WORD_RATIO } from "./brand";
 import { cx } from "@/lib/util";
 
 /** Valores determinísticos para gráficos ilustrativos. */
@@ -33,7 +34,7 @@ export function PhonePainel() {
   return (
     <Phone>
       <div className="px-[18px] pt-5 text-center">
-        <div className="text-[11px] font-semibold tracking-[0.06em]">MEU ESTACIONAMENTO</div>
+        <Wordmark className="mx-auto text-ink" style={{ height: 16, width: 16 * WORD_RATIO }} />
         <span className="chip mt-3 !text-[10.5px]">Hoje · ao vivo</span>
         <div className="mt-3 text-[11px] text-muted">Recebido hoje</div>
         <Money value={1240} className="text-[38px] leading-tight" />
@@ -143,7 +144,7 @@ export function TelaSistema() {
       <div className="grid overflow-hidden rounded-[14px] bg-bg text-[12px] md:grid-cols-[190px_1fr]">
         <div className="hidden border-r border-line bg-white/55 p-4 md:block">
           <div className="mb-4 flex items-center gap-2 font-semibold">
-            <span className="inline-flex size-6 items-center justify-center rounded-[8px] bg-dark text-[12px] text-white">V</span>vagou
+            <Wordmark className="text-ink" style={{ height: 18, width: 18 * WORD_RATIO }} />
           </div>
           <div className="mb-3 rounded-[10px] border border-line bg-paper px-2.5 py-2 text-[11px] text-muted">Buscar placa…</div>
           <div className="grid grid-cols-2 gap-1.5">

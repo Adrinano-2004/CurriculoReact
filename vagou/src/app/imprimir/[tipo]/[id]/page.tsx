@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 import { QrCode } from "@/components/qrcode";
+import { Wordmark, WORD_RATIO } from "@/components/brand";
 import { useHydrated } from "@/lib/hooks";
 import { pixCopiaECola } from "@/lib/pix";
 import { brl } from "@/lib/pricing";
@@ -35,6 +36,7 @@ export default function Imprimir() {
   const e = s.config.empresa;
   const cabecalho = (
     <>
+      <Wordmark className="mx-auto mb-2 block text-[#111]" style={{ height: 22, width: 22 * WORD_RATIO }} />
       <div className="text-center text-[14px] font-bold uppercase">{e.nome}</div>
       <div className="text-center text-[#555]">
         {e.cidade} · {e.documento}

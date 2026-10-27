@@ -28,6 +28,7 @@
   --color-warn-ink: #9a6a00;
   --color-peach: #f6b79a;
   --color-peach-soft: #fbe3d6;
+  --color-placa: #1f47a0;
 
   --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Newsreader", ui-serif, Georgia, serif;
@@ -242,6 +243,11 @@
 
   .row {
     @apply flex items-center justify-between gap-3 border-b border-[#f0f0ee] py-[10px] last:border-b-0;
+  }
+
+  /* faixas pintadas a 56°, elemento da marca */
+  .faixas {
+    background: repeating-linear-gradient(124deg, #fff 0 9px, transparent 9px 34px);
   }
 
   .scroll-soft {

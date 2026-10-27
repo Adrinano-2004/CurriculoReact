@@ -3,19 +3,12 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { create } from "zustand";
 import { I } from "./icons";
+import { Wordmark, WORD_RATIO } from "./brand";
 import { cx } from "@/lib/util";
 
 /* ---------- marca ---------- */
-export function Logo({ dark = false, className }: { dark?: boolean; className?: string }) {
-  return (
-    <span className={cx("inline-flex items-center gap-2 font-semibold tracking-[0.01em]", className)}>
-      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden>
-        <rect width="26" height="26" rx="8" fill={dark ? "#fff" : "#2A2A29"} />
-        <path d="M7.5 8.5 13 18l5.5-9.5" fill="none" stroke={dark ? "#2A2A29" : "#fff"} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      <span className="text-[17px] lowercase">vagou</span>
-    </span>
-  );
+export function Logo({ dark = false, className, height = 24 }: { dark?: boolean; className?: string; height?: number }) {
+  return <Wordmark className={cx("block", dark ? "text-white" : "text-ink", className)} style={{ height, width: height * WORD_RATIO }} />;
 }
 
 /* ---------- títulos ---------- */
