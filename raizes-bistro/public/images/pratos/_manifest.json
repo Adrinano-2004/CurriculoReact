@@ -1,0 +1,306 @@
+{
+ "bolinho-de-bacalhau": {
+  "src": "prato-bolinho_de_bacalhau.jfif",
+  "circle": [
+   463,
+   469,
+   291
+  ]
+ },
+ "bruschetta-caprese": {
+  "src": "prato-bruschetta_caprese.jfif",
+  "circle": [
+   532,
+   529,
+   477
+  ]
+ },
+ "bruschetta-tradicional": {
+  "src": "prato-bruschetta_tradicional.jfif",
+  "circle": [
+   517,
+   364,
+   318
+  ]
+ },
+ "carpaccio-de-lagarto": {
+  "src": "prato-carpaccio_de_lagarto.jfif",
+  "circle": [
+   515,
+   556,
+   460
+  ]
+ },
+ "casquinha-de-siri": {
+  "src": "prato-casquinha_de_siri.jfif",
+  "circle": [
+   522,
+   508,
+   499
+  ]
+ },
+ "couvert": {
+  "src": "prato-couvert.jfif",
+  "circle": [
+   503,
+   385,
+   371
+  ]
+ },
+ "croquete-de-carne": {
+  "src": "prato-croquete_de_carne.jfif",
+  "circle": [
+   491,
+   518,
+   481
+  ]
+ },
+ "grilled-de-file": {
+  "src": "prato-grilled_de_file.jfif",
+  "circle": [
+   464,
+   510,
+   415
+  ]
+ },
+ "kafta": {
+  "src": "prato-kafta.jfif",
+  "circle": [
+   493,
+   508,
+   439
+  ]
+ },
+ "le-rechaud-do-raizes": {
+  "src": "prato-le_rechaud_do_raizes.jfif",
+  "circle": [
+   510,
+   512,
+   494
+  ]
+ },
+ "risoles-de-camarao": {
+  "src": "prato-risoles_de_camarao.jfif",
+  "circle": [
+   505,
+   524,
+   500
+  ]
+ },
+ "escalope-de-mignon-ao-molho-mostarda": {
+  "src": "prato-Escalope_de_Mignon_ao_molho_mostarda.jpeg",
+  "circle": [
+   510,
+   503,
+   503
+  ]
+ },
+ "lagostim-a-thermidor": {
+  "src": "prato-Lagostim_a_Thermidor.jpg",
+  "circle": [
+   512,
+   512,
+   512
+  ]
+ },
+ "sinfonia-luiza": {
+  "src": "prato-Sinfonia_Luiza.jpeg",
+  "circle": [
+   505,
+   505,
+   501
+  ]
+ },
+ "steak-de-mignon-a-la-parmegiana": {
+  "src": "prato-Steak_de_Mignon_a_la _Parmegiana.jpg",
+  "circle": [
+   512,
+   512,
+   512
+  ]
+ },
+ "beef-chorizo-com-batatas-rusticas-regadas-de-fonduta-de-queijos": {
+  "src": "prato-Beef_Chorizo_com_batatas_rústicas_regadas_de_fonduta_de_queijos.jpg",
+  "circle": [
+   529,
+   505,
+   476
+  ]
+ },
+ "bombom-de-filet": {
+  "src": "prato-Bombom_de_Filet.jpg",
+  "circle": [
+   508,
+   544,
+   320
+  ]
+ },
+ "carre-de-cordeiro": {
+  "src": "prato-Carré_de_cordeiro.jpg",
+  "circle": [
+   517,
+   517,
+   474
+  ]
+ },
+ "fettuccine-ao-molho-a-arrabiata-com-ragu-de-cordeiro": {
+  "src": "prato-Fettuccine _ao_Molho_à_arrabiata_com_ragu_de_cordeiro.jpg",
+  "circle": [
+   512,
+   512,
+   512
+  ]
+ },
+ "fettuccine-mare-monti": {
+  "src": "prato-Fettuccine_Mare_Monti.jpg",
+  "circle": [
+   508,
+   515,
+   447
+  ]
+ },
+ "fettuccine-ao-molho-bechamel-com-cogumelos-funghi-com-grilled-file": {
+  "src": "prato-Fettuccine_ao_molho_bechamel_com_cogumelos_funghi_com_grilled_filé.jpg",
+  "circle": [
+   510,
+   491,
+   482
+  ]
+ },
+ "file-de-linguado-la-bonne-femme": {
+  "src": "prato-Filé_de_Linguado_La_Bonne_Femme.jpeg",
+  "circle": [
+   512,
+   503,
+   485
+  ]
+ },
+ "file-de-saint-peter-a-belle-meuniere": {
+  "src": "prato-Filé_de_Saint_Peter_à_Belle_Meunière.jpeg",
+  "circle": [
+   520,
+   522,
+   498
+  ]
+ },
+ "gnocchi-artesanal-a-fonduta-de-queijos-sobre-cama-de-paillard-trufado": {
+  "src": "prato-Gnocchi_Artesanal_à_fonduta_de_queijos_sobre_cama_de_Paillard_Trufado.jpg",
+  "circle": [
+   515,
+   508,
+   484
+  ]
+ },
+ "gratin-de-mignon": {
+  "src": "prato-Gratin_De_Mignon.jpg",
+  "circle": [
+   460,
+   529,
+   455
+  ]
+ },
+ "lasagna-de-bacalhau": {
+  "src": "prato-Lasagna_de_Bacalhau.jpeg",
+  "circle": [
+   515,
+   481,
+   318
+  ]
+ },
+ "magret-de-pato": {
+  "src": "prato-Magret_de_Pato.jpg",
+  "circle": [
+   515,
+   522,
+   469
+  ]
+ },
+ "medalhas-de-salmao": {
+  "src": "prato-Medalhas_de_Salmão.jpg",
+  "circle": [
+   510,
+   503,
+   431
+  ]
+ },
+ "ravioli-caprese": {
+  "src": "prato-Ravioli_Caprese.jpg",
+  "circle": [
+   512,
+   510,
+   486
+  ]
+ },
+ "ravioli-de-shitake": {
+  "src": "prato-Ravioli_de_shitake.jpg",
+  "circle": [
+   515,
+   493,
+   458
+  ]
+ },
+ "risoto-de-camarao-com-aspargos-frescos": {
+  "src": "prato-Risoto_de_camarão_com_aspargos_frescos.jpeg",
+  "circle": [
+   512,
+   515,
+   506
+  ]
+ },
+ "brownie-da-julia": {
+  "src": "prato-brownie_da_julia.jfif",
+  "circle": [
+   512,
+   503,
+   484
+  ]
+ },
+ "cafe-expresso": {
+  "src": "prato-cafe_expresso.jfif",
+  "circle": [
+   505,
+   510,
+   444
+  ]
+ },
+ "profiterolis": {
+  "src": "prato-profiterolis.jfif",
+  "circle": [
+   446,
+   534,
+   278
+  ]
+ },
+ "pudim-de-leite-condensado": {
+  "src": "prato-pudim_de_leite_condensado.jfif",
+  "circle": [
+   510,
+   510,
+   498
+  ]
+ },
+ "tiramissu": {
+  "src": "prato-tiramissu.jfif",
+  "circle": [
+   563,
+   512,
+   461
+  ]
+ },
+ "torta-duo-mousse": {
+  "src": "prato-torta_duo_mousse.jfif",
+  "circle": [
+   510,
+   510,
+   416
+  ]
+ },
+ "trifle-de-banana": {
+  "src": "prato-trifle_de _banana.jfif",
+  "circle": [
+   599,
+   263,
+   263
+  ]
+ }
+}
