@@ -1,38 +1,43 @@
 import { Hero } from "@/components/hero/Hero";
 import { Marquee } from "@/components/motion/Marquee";
 import { Preloader } from "@/components/motion/Preloader";
-import { Ambiance } from "@/components/sections/Ambiance";
+import { ReservationProvider } from "@/components/reservation/ReservationProvider";
+import { About } from "@/components/sections/About";
+import { BookTable } from "@/components/sections/BookTable";
+import { ChefSelection } from "@/components/sections/ChefSelection";
+import { Desserts } from "@/components/sections/Desserts";
 import { Footer } from "@/components/sections/Footer";
+import { Gallery } from "@/components/sections/Gallery";
 import { Header } from "@/components/sections/Header";
-import { Manifesto } from "@/components/sections/Manifesto";
 import { Menu } from "@/components/sections/Menu";
-import { Reservation } from "@/components/sections/Reservation";
-import { Reviews } from "@/components/sections/Reviews";
-import { Story } from "@/components/sections/Story";
+import { Salon } from "@/components/sections/Salon";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 
-// Hero e Cardápio seguem a referência PALAZZO (mesa giratória e pratos vistos de cima).
-// As demais seções são provisórias até chegar a base estrutural de referência.
+// Estrutura e animações seguem a base de referência (Grillify): sobre com faixa de fotos, marquee,
+// cards empilhados, cortina, carrossel, faixa de reserva, galeria e rodapé "fale com a gente".
+// Hero (mesa giratória) e Cardápio (pratos vistos de cima) seguem a referência PALAZZO.
 export default function Home() {
   return (
-    <>
+    <ReservationProvider>
       <Preloader />
       <Header />
       <main>
         <Hero />
-        <Manifesto />
-        <Menu />
+        <About />
         <Marquee
-          items={["Massas artesanais", "Comfort food", "Molhos autorais", "Carta de vinhos", "Juiz de Fora"]}
-          className="bg-terracotta py-6 font-display text-[clamp(2rem,4.5vw,4rem)] italic text-cream"
+          items={["Sugestões da Chef", "Massas artesanais", "Molhos autorais", "Comfort food"]}
+          separator="/"
+          className="bg-espresso py-3 text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-cream"
         />
-        <Story />
-        <Ambiance />
-        <Reviews />
-        <Reservation />
+        <ChefSelection />
+        <Menu />
+        <Salon />
+        <Desserts />
+        <BookTable />
+        <Gallery />
       </main>
       <Footer />
       <FloatingWhatsApp />
-    </>
+    </ReservationProvider>
   );
 }

@@ -20,14 +20,15 @@ function slotsFor(dateISO: string) {
 const formatDate = (iso: string) =>
   new Date(`${iso}T12:00:00`).toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "2-digit" });
 
-export function Reservation() {
+/** Informações da casa + formulário que monta a mensagem de reserva para o WhatsApp. */
+export function ReservationPanel({ dish }: { dish?: string }) {
   const [status, setStatus] = useState<{ open: boolean; text: string } | null>(null);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [people, setPeople] = useState("2");
   const [occasion, setOccasion] = useState(OCCASIONS[0]);
   const [name, setName] = useState("");
-  const [notes, setNotes] = useState("");
+  const [notes, setNotes] = useState(dish ? `Quero provar o ${dish}.` : "");
   const [today, setToday] = useState("");
 
   useEffect(() => {
@@ -64,11 +65,10 @@ export function Reservation() {
   const label = "eyebrow text-cream/55";
 
   return (
-    <section id="reservas" aria-labelledby="reservas-title" className="grain relative bg-walnut py-28 md:py-40">
-      <div className="container-x grid gap-16 md:grid-cols-12">
+    <div className="grid gap-12 px-6 pb-10 pt-6 md:grid-cols-12 md:gap-10 md:p-12">
         <div className="md:col-span-5">
           <p className="eyebrow text-candle">Reservas</p>
-          <h2 id="reservas-title" className="title-lg mt-5 text-cream">
+          <h2 className="mt-4 font-display text-[clamp(2.4rem,4vw,3.6rem)] leading-none text-cream">
             Sua mesa <em className="italic text-candle">está posta.</em>
           </h2>
           {status && (
@@ -77,7 +77,7 @@ export function Reservation() {
               {status.text}
             </p>
           )}
-          <dl className="mt-10 space-y-7 text-cream/80">
+          <dl className="mt-9 space-y-6 text-cream/80">
             <div>
               <dt className={label}>Horários</dt>
               {openingHours.map((h) => (
@@ -115,7 +115,7 @@ export function Reservation() {
           </dl>
         </div>
 
-        <form onSubmit={submit} className="rounded-sm border border-cream/10 bg-espresso/40 p-6 backdrop-blur-sm md:col-span-6 md:col-start-7 md:p-10" aria-describedby="reserva-ajuda">
+        <form onSubmit={submit} className="rounded-sm border border-cream/10 bg-espresso/40 p-6 md:col-span-7 md:p-8" aria-describedby="reserva-ajuda">
           <p id="reserva-ajuda" className="text-sm leading-relaxed text-cream/60">
             Preencha e enviamos tudo pronto para o WhatsApp da casa. A reserva é confirmada pela equipe.
           </p>
@@ -178,7 +178,6 @@ export function Reservation() {
             Enviar pedido de reserva
           </button>
         </form>
-      </div>
-    </section>
+    </div>
   );
 }

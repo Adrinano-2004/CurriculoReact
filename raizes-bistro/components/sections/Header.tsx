@@ -3,13 +3,16 @@
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useEffect, useState } from "react";
 import { useLenis, useScrollTo } from "@/components/motion/SmoothScroll";
-import { site, whatsappLink } from "@/lib/site";
+import { useReservation } from "@/components/reservation/ReservationProvider";
+import { OutlineButton } from "@/components/ui/OutlineButton";
+import { site } from "@/lib/site";
 
 const LINKS = [
+  { href: "#sobre", label: "Sobre" },
+  { href: "#sugestoes", label: "Da Chef" },
   { href: "#cardapio", label: "Cardápio" },
-  { href: "#historia", label: "Nossa história" },
-  { href: "#ambiente", label: "Ambiente" },
-  { href: "#reservas", label: "Reservas" },
+  { href: "#salao", label: "Salão" },
+  { href: "#contato", label: "Contato" },
 ];
 
 export function Header() {
@@ -19,6 +22,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const scrollTo = useScrollTo();
   const lenis = useLenis();
+  const { openReservation } = useReservation();
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -52,7 +56,7 @@ export function Header() {
           </a>
 
           <nav aria-label="Principal" className="hidden md:block">
-            <ul className="flex items-center gap-9">
+            <ul className="flex items-center gap-8">
               {LINKS.map((l) => (
                 <li key={l.href}>
                   <a href={l.href} onClick={go(l.href)} className="group relative py-2 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-cream/80 transition-colors hover:text-cream">
@@ -65,15 +69,9 @@ export function Header() {
           </nav>
 
           <div className="relative z-10 flex items-center gap-3">
-            <a
-              href={whatsappLink("Olá! Gostaria de reservar uma mesa no Raízes.")}
-              target="_blank"
-              rel="noopener"
-              data-track="whatsapp-header"
-              className="hidden rounded-full bg-terracotta px-5 py-3 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-cream transition-colors duration-300 hover:bg-candle hover:text-espresso sm:inline-block"
-            >
+            <OutlineButton className="hidden sm:inline-flex" onClick={() => openReservation()}>
               Reservar mesa
-            </a>
+            </OutlineButton>
             <button
               type="button"
               onClick={() => setOpen((o) => !o)}
@@ -120,9 +118,16 @@ export function Header() {
               </ul>
             </nav>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="space-y-4">
-              <a href={whatsappLink("Olá! Gostaria de reservar uma mesa no Raízes.")} target="_blank" rel="noopener" className="block rounded-full bg-terracotta py-4 text-center text-xs font-semibold uppercase tracking-[0.24em] text-cream">
-                Reservar pelo WhatsApp
-              </a>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  openReservation();
+                }}
+                className="block w-full rounded-full border border-cream/70 py-4 text-center text-xs font-semibold uppercase tracking-[0.24em] text-cream"
+              >
+                Reservar mesa
+              </button>
               <p className="eyebrow text-center text-cream/50">Qua a sáb 19h–23h · Dom 12h–16h</p>
             </motion.div>
           </motion.div>

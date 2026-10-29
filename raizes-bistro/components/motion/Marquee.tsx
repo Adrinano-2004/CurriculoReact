@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { gsap, prefersReducedMotion, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 /** Faixa infinita de palavras; acelera e inverte conforme a velocidade do scroll. */
-export function Marquee({ items, className = "" }: { items: string[]; className?: string }) {
+export function Marquee({ items, className = "", separator = "✦" }: { items: string[]; className?: string; separator?: string }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -29,10 +29,10 @@ export function Marquee({ items, className = "" }: { items: string[]; className?
 
   const row = (hidden: boolean) => (
     <div className="flex shrink-0 items-center" aria-hidden={hidden || undefined}>
-      {items.map((t) => (
-        <span key={t} className="flex items-center">
-          <span className="px-6 md:px-10">{t}</span>
-          <span className="text-[0.4em] opacity-70">✦</span>
+      {items.map((t, i) => (
+        <span key={`${t}-${i}`} className="flex items-center">
+          <span className="px-4 md:px-6">{t}</span>
+          <span className="opacity-70">{separator}</span>
         </span>
       ))}
     </div>
