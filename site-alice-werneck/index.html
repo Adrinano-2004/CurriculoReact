@@ -4,61 +4,59 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dra. Alice Werneck | Otorrinolaringologista em Juiz de Fora</title>
-  <meta name="description" content="Otorrinolaringologista em Juiz de Fora (Alto dos Passos). Cirurgia de amígdala, teste de alergia, audiometria, ronco, apneia, tontura e alergias, para crianças, adultos e idosos." />
+  <meta name="description" content="Otorrinolaringologista e alergologista em Juiz de Fora. Cirurgia de amígdala, teste de alergia e audiometria para crianças, adultos e idosos. CRM-MG 109116 | RQE 68427." />
   <meta name="theme-color" content="#EFECE7" />
   <script>document.documentElement.classList.add("js")</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Poppins (corpo) + Cormorant Garamond (fallback da Miamo enquanto o arquivo da fonte não é adicionado) -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/alice-retrato-hero.webp" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- ============ HEADER (transparente → vidro claro ao rolar) ============ -->
+  <!-- ================= HEADER ================= -->
   <header class="header" id="header">
     <div class="header__inner">
-      <a href="#inicio" class="brand" aria-label="Dra. Alice Werneck, início">
-        <span class="brand__name">Dra. Alice Werneck</span>
-        <span class="brand__role">Otorrinolaringologista</span>
-      </a>
+      <a href="#inicio" class="logo" aria-label="Dra. Alice Werneck, otorrinolaringologista. Voltar ao início"></a>
 
       <nav class="nav" id="nav" aria-label="Principal">
         <a href="#sobre" class="nav__link">Sobre</a>
-        <a href="#para-quem" class="nav__link">Para quem é</a>
         <a href="#tratamentos" class="nav__link">Tratamentos</a>
-        <a href="#contato" class="nav__link">Contato</a>
+        <a href="#clinica" class="nav__link">Clínica</a>
+        <a href="#duvidas" class="nav__link">Dúvidas</a>
+        <a href="#" class="btn btn--primary nav__cta-mobile js-whats"><span class="btn__label">Agendar consulta</span><span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
       </nav>
 
-      <a href="#" class="btn btn--primary btn--sm js-whats" data-msg="Olá! Gostaria de agendar uma consulta com a Dra. Alice.">
+      <a href="#" class="btn btn--primary btn--sm header__cta js-whats">
         <span class="btn__label">Agendar consulta</span>
         <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
 
-      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
-        <span></span><span></span>
-      </button>
+      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
     </div>
+    <!-- barra de progresso de leitura (azul → vinho) -->
+    <div class="progress" aria-hidden="true"><span id="progress"></span></div>
   </header>
 
   <main>
 
-    <!-- ============ HERO ============ -->
+    <!-- ================= HERO ================= -->
     <section class="hero" id="inicio">
       <div class="container hero__grid">
         <div class="hero__text">
-          <p class="hero__kicker reveal-fade">Juiz de Fora · Alto dos Passos</p>
+          <p class="kicker reveal-fade">Otorrinolaringologista e alergologista em Juiz&nbsp;de&nbsp;Fora</p>
           <h1 class="hero__title">
-            <span class="line"><span>Ouvir, respirar</span></span>
-            <span class="line"><span>e dormir bem</span></span>
-            <span class="line"><span><em>em&nbsp;todas as&nbsp;fases</em></span></span>
+            <span class="line"><span>Respirar bem,</span></span>
+            <span class="line"><span>ouvir bem,</span></span>
+            <span class="line"><span><em>viver bem</em></span></span>
           </h1>
           <p class="hero__lead reveal-fade">
-            Cuidado humanizado em otorrino e alergia para crianças, adultos e&nbsp;idosos, da&nbsp;consulta à&nbsp;cirurgia.
+            Otorrinolaringologista titulada pela ABORL&#8209;CCF, com especialização pela PUC-Rio e formação em Foniatria. Atende crianças, adultos e&nbsp;idosos.
           </p>
           <div class="hero__ctas reveal-fade">
-            <a href="#" class="btn btn--primary js-whats" data-msg="Olá! Gostaria de agendar uma consulta com a Dra. Alice.">
+            <a href="#" class="btn btn--primary js-whats">
               <span class="btn__label">Agendar consulta</span>
               <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a>
@@ -67,24 +65,18 @@
               <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
             </a>
           </div>
+          <p class="crm reveal-fade">CRM-MG 109116 | RQE 68427</p>
         </div>
 
-        <div class="hero__media">
-          <!-- Arco = mesmo formato da paleta de cores da marca -->
-          <figure class="arch arch--hero" data-parallax>
-            <img src="assets/dra-alice.jpg" alt="Dra. Alice Werneck, otorrinolaringologista" onerror="this.remove()" />
-            <span class="arch__monogram" aria-hidden="true">AW</span>
-          </figure>
-          <div class="hero__badge reveal-fade">
-            <span class="dot"></span> Agenda aberta em Juiz&nbsp;de&nbsp;Fora
-          </div>
+        <!-- Retrato fatiado em "onda sonora" (referência: Kardome) -->
+        <div class="wave" id="wave" role="img" aria-label="Retrato da Dra. Alice Werneck sorrindo, em fundo neutro">
+          <!-- as barras são geradas pelo main.js a partir desta imagem -->
+          <img class="wave__fallback" src="assets/alice-retrato-hero.webp" alt="" />
         </div>
       </div>
-
-      <a href="#sobre" class="scroll-cue" aria-label="Rolar para baixo"><span></span></a>
     </section>
 
-    <!-- ============ NÚMEROS / CREDENCIAIS ============ -->
+    <!-- ================= CREDENCIAIS ================= -->
     <section class="stats" aria-label="Formação e experiência">
       <div class="container stats__grid">
         <div class="stat">
@@ -106,208 +98,253 @@
       </div>
     </section>
 
-    <!-- ============ SOBRE (sem título de seção) ============ -->
+    <!-- ================= MANIFESTO (palavras acendem com o scroll · ref. Lando Norris) ================= -->
+    <section class="manifesto" aria-label="Como a Dra. Alice atende">
+      <div class="container">
+        <p class="manifesto__text js-manifesto">
+          Ouvir com <em>calma</em>, examinar com <em>cuidado</em> e explicar com <em>clareza</em>, para que cada paciente, da criança ao idoso, volte a <em>respirar</em>, <em>ouvir</em> e <em>dormir&nbsp;bem</em>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= SOBRE ================= -->
     <section class="about" id="sobre">
       <div class="container about__grid">
-        <h2 class="about__title split-words">
-          Uma consulta sem pressa, com&nbsp;tempo para ouvir você e&nbsp;sua&nbsp;família.
-        </h2>
+        <figure class="arch arch--about">
+          <img src="assets/alice-retrato-oficial.webp" alt="Dra. Alice Werneck sentada no consultório, sorrindo" loading="lazy" />
+        </figure>
+
         <div class="about__body">
-          <p class="reveal-up">
-            Sou otorrinolaringologista em Juiz de Fora e atendo do bebê ao idoso. Cuido de ouvido, nariz e garganta, alergias, sono e tontura, e realizo na própria clínica os exames que ajudam a fechar o&nbsp;diagnóstico.
-          </p>
-          <p class="reveal-up">
-            Meu compromisso é explicar cada etapa com clareza, para que você saia da consulta entendendo o que está acontecendo e qual é o melhor caminho para voltar a ter qualidade de&nbsp;vida.
-          </p>
-          <ul class="about__chips reveal-up">
-            <li>Consultas clínicas</li>
-            <li>Exames na clínica</li>
-            <li>Cirurgias</li>
-          </ul>
+          <h2 class="section-title split-words">Quem é a Dra. Alice&nbsp;Werneck</h2>
+          <p class="about__quote reveal-up">Sou médica otorrinolaringologista e alergologista, e acredito que todo bom tratamento começa com uma boa&nbsp;escuta.</p>
+          <p class="reveal-up">Me formei em Medicina pela Universidade Estácio de Sá e fiz a especialização em Otorrinolaringologia pela PUC-Rio, em parceria com a Clínica Septo. Tenho título de especialista pela ABORL&#8209;CCF e formação complementar em Foniatria, que me permite avaliar também a voz e a fala, de crianças com atraso na fala a adultos com&nbsp;rouquidão.</p>
+          <p class="reveal-up">Na consulta, ouço sua história com calma antes de pedir qualquer exame ou indicar uma cirurgia. Explico o que encontrei de forma clara, para que você saia sabendo o que está acontecendo e qual é o próximo&nbsp;passo.</p>
+          <div class="about__foot reveal-up">
+            <a href="#" class="btn btn--primary js-whats">
+              <span class="btn__label">Agendar consulta</span>
+              <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <span class="crm">CRM-MG 109116 | RQE 68427</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ PARA QUEM É (sem título de seção) ============ -->
-    <section class="audience" id="para-quem">
+    <!-- ================= PARA QUEM É ================= -->
+    <section class="audience">
       <div class="container">
-        <h2 class="section-title split-words">Cuidado pensado para cada fase da&nbsp;vida</h2>
-
+        <h2 class="section-title split-words">Cada fase da vida pede um cuidado&nbsp;diferente</h2>
         <div class="audience__grid">
           <article class="aud-card hover-card" tabindex="0">
             <span class="aud-card__index">01</span>
             <h3 class="aud-card__title">Crianças</h3>
-            <p class="aud-card__text">Amígdalas e adenoide aumentadas, otites de repetição, nariz sempre entupido, ronco e baixa audição que atrapalham a escola, o sono e a&nbsp;rotina.</p>
-            <a href="#" class="aud-card__link js-whats" data-msg="Olá! Gostaria de agendar uma consulta para meu filho(a) com a Dra. Alice.">Agendar para meu filho <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <p class="aud-card__text">Ronco, respiração pela boca, otites e alergias, com uma avaliação que respeita o tempo de cada&nbsp;criança.</p>
           </article>
-
           <article class="aud-card hover-card" tabindex="0">
             <span class="aud-card__index">02</span>
             <h3 class="aud-card__title">Adultos</h3>
-            <p class="aud-card__text">Ronco, apneia do sono, rinite e sinusite, crises de tontura e problemas respiratórios que tiram a energia e a qualidade do&nbsp;dia&nbsp;a&nbsp;dia.</p>
-            <a href="#" class="aud-card__link js-whats" data-msg="Olá! Gostaria de agendar uma consulta com a Dra. Alice.">Agendar consulta <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <p class="aud-card__text">Sinusite, rinite, rouquidão, tontura e apneia, com exame e orientação no próprio&nbsp;consultório.</p>
           </article>
-
           <article class="aud-card hover-card" tabindex="0">
             <span class="aud-card__index">03</span>
             <h3 class="aud-card__title">Idosos</h3>
-            <p class="aud-card__text">Perda auditiva, zumbido e desequilíbrio. Avaliação completa da audição para devolver a conversa, a segurança e a&nbsp;independência.</p>
-            <a href="#" class="aud-card__link js-whats" data-msg="Olá! Gostaria de agendar uma avaliação da audição com a Dra. Alice.">Avaliar a audição <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <p class="aud-card__text">Perda auditiva e zumbido, com audiometria para acompanhar a audição de&nbsp;perto.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ============ FAIXA DE CONDIÇÕES (marquee) ============ -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
-        <span>Rinite</span><i></i><span>Sinusite</span><i></i><span>Otite</span><i></i><span>Ronco</span><i></i><span>Apneia do sono</span><i></i><span>Tontura</span><i></i><span>Perda auditiva</span><i></i><span>Asma</span><i></i><span>Alergias</span><i></i>
-        <span>Rinite</span><i></i><span>Sinusite</span><i></i><span>Otite</span><i></i><span>Ronco</span><i></i><span>Apneia do sono</span><i></i><span>Tontura</span><i></i><span>Perda auditiva</span><i></i><span>Asma</span><i></i><span>Alergias</span><i></i>
+        <span>Ronco</span><i></i><span>Rinite</span><i></i><span>Sinusite</span><i></i><span>Otite</span><i></i><span>Apneia do sono</span><i></i><span>Tontura</span><i></i><span>Rouquidão</span><i></i><span>Zumbido</span><i></i><span>Perda auditiva</span><i></i><span>Alergias</span><i></i>
+        <span>Ronco</span><i></i><span>Rinite</span><i></i><span>Sinusite</span><i></i><span>Otite</span><i></i><span>Apneia do sono</span><i></i><span>Tontura</span><i></i><span>Rouquidão</span><i></i><span>Zumbido</span><i></i><span>Perda auditiva</span><i></i><span>Alergias</span><i></i>
       </div>
     </div>
 
-    <!-- ============ TRATAMENTOS (cards com hover "pulando") ============ -->
+    <!-- ================= TRATAMENTOS ================= -->
     <section class="services" id="tratamentos">
       <div class="container">
         <div class="services__head">
-          <h2 class="section-title split-words">Tratamentos e&nbsp;exames</h2>
-          <a href="#" class="link-arrow js-whats" data-msg="Olá! Gostaria de saber mais sobre os tratamentos da Dra. Alice.">Tirar dúvidas no WhatsApp <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <h2 class="section-title split-words">Os atendimentos mais&nbsp;procurados</h2>
+          <a href="#" class="link-arrow js-whats" data-msg="Olá! Gostaria de tirar uma dúvida sobre os tratamentos da Dra. Alice.">Tirar dúvidas no WhatsApp <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
 
-        <!--
-          Para trocar as imagens: coloque as fotos em assets/servicos/ com os nomes abaixo.
-          Enquanto não houver foto, o card mostra o fundo na cor da marca com o ícone.
-        -->
         <div class="services__grid">
-          <a href="#" class="svc hover-card svc--wine js-whats" data-msg="Olá! Gostaria de saber sobre cirurgia de amígdala e adenoide.">
-            <img class="svc__img" src="assets/servicos/amigdala.jpg" alt="" loading="lazy" onerror="this.remove()" />
-            <svg class="svc__icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M20 14c-6 8-6 24 0 36M44 14c6 8 6 24 0 36M26 30c0-6 12-6 12 0v10c0 6-12 6-12 0z"/></svg>
-            <span class="svc__tag">Destaque</span>
+          <a href="#" class="svc hover-card js-whats" data-msg="Olá! Gostaria de saber sobre a cirurgia de amígdala.">
+            <img class="svc__img" src="assets/alice-cirurgia.webp" alt="Dra. Alice Werneck durante procedimento cirúrgico" loading="lazy" />
             <div class="svc__body">
-              <h3 class="svc__title">Cirurgia de amígdala e&nbsp;adenoide</h3>
-              <p class="svc__desc">Para crianças e adultos com infecções de repetição, ronco ou&nbsp;apneia.</p>
+              <h3 class="svc__title">Cirurgia de amígdala</h3>
+              <p class="svc__desc">Para infecções de garganta repetidas, ronco e apneia, em crianças e&nbsp;adultos.</p>
               <span class="svc__more">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </div>
           </a>
-
-          <a href="#" class="svc hover-card svc--navy js-whats" data-msg="Olá! Gostaria de saber sobre o teste de alergia.">
-            <img class="svc__img" src="assets/servicos/teste-alergia.jpg" alt="" loading="lazy" onerror="this.remove()" />
-            <svg class="svc__icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="20" cy="22" r="5"/><circle cx="44" cy="22" r="5"/><circle cx="20" cy="42" r="5"/><circle cx="44" cy="42" r="5"/><circle cx="32" cy="32" r="5"/></svg>
-            <span class="svc__tag">Destaque</span>
+          <a href="#" class="svc hover-card js-whats" data-msg="Olá! Gostaria de saber sobre o teste de alergia.">
+            <img class="svc__img" src="assets/alice-teste-alergia.webp" alt="Aplicação de teste de alergia na pele do braço" loading="lazy" />
             <div class="svc__body">
-              <h3 class="svc__title">Teste de&nbsp;alergia</h3>
-              <p class="svc__desc">Identifica o que causa rinite, asma e crises alérgicas, para tratar a&nbsp;origem.</p>
+              <h3 class="svc__title">Teste de alergia</h3>
+              <p class="svc__desc">Descobre o que desencadeia rinite, asma e crises alérgicas, para tratar a&nbsp;causa.</p>
               <span class="svc__more">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </div>
           </a>
-
-          <a href="#" class="svc hover-card svc--sand js-whats" data-msg="Olá! Gostaria de agendar uma audiometria.">
-            <img class="svc__img" src="assets/servicos/audiometria.jpg" alt="" loading="lazy" onerror="this.remove()" />
-            <svg class="svc__icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 32h6l4-10 6 22 6-30 6 34 6-22 4 6h10"/></svg>
-            <span class="svc__tag">Destaque</span>
+          <a href="#" class="svc hover-card js-whats" data-msg="Olá! Gostaria de agendar uma audiometria.">
+            <img class="svc__img" src="assets/alice-exame-ouvido.webp" alt="Dra. Alice Werneck examina o ouvido de uma paciente" loading="lazy" />
             <div class="svc__body">
               <h3 class="svc__title">Audiometria</h3>
-              <p class="svc__desc">Avaliação completa da audição, do teste infantil ao acompanhamento do&nbsp;idoso.</p>
-              <span class="svc__more">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </div>
-          </a>
-
-          <a href="#" class="svc hover-card svc--navy js-whats" data-msg="Olá! Gostaria de saber sobre tratamento para ronco e apneia do sono.">
-            <img class="svc__img" src="assets/servicos/sono.jpg" alt="" loading="lazy" onerror="this.remove()" />
-            <svg class="svc__icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M40 12a20 20 0 1 0 12 30A18 18 0 0 1 40 12z"/></svg>
-            <div class="svc__body">
-              <h3 class="svc__title">Ronco e apneia do&nbsp;sono</h3>
-              <p class="svc__desc">Diagnóstico e tratamento clínico ou cirúrgico para voltar a dormir&nbsp;bem.</p>
-              <span class="svc__more">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </div>
-          </a>
-
-          <a href="#" class="svc hover-card svc--sand js-whats" data-msg="Olá! Gostaria de saber sobre tratamento para tontura.">
-            <img class="svc__img" src="assets/servicos/tontura.jpg" alt="" loading="lazy" onerror="this.remove()" />
-            <svg class="svc__icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 32m-4 0a4 4 0 1 0 8 0a10 10 0 1 0-20 0a16 16 0 1 0 32 0a22 22 0 1 0-44 0"/></svg>
-            <div class="svc__body">
-              <h3 class="svc__title">Tontura e&nbsp;labirintite</h3>
-              <p class="svc__desc">Investigação da causa da vertigem e do desequilíbrio, com tratamento&nbsp;direcionado.</p>
-              <span class="svc__more">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </div>
-          </a>
-
-          <a href="#" class="svc hover-card svc--wine js-whats" data-msg="Olá! Gostaria de saber sobre exames de nariz e garganta.">
-            <img class="svc__img" src="assets/servicos/exames.jpg" alt="" loading="lazy" onerror="this.remove()" />
-            <svg class="svc__icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="28" cy="28" r="14"/><path d="M38 38l14 14"/></svg>
-            <div class="svc__body">
-              <h3 class="svc__title">Exames de nariz e&nbsp;garganta</h3>
-              <p class="svc__desc">Endoscopia nasal e laringoscopia feitas na clínica, com resultado na&nbsp;consulta.</p>
+              <p class="svc__desc">Avaliação da audição, da criança ao idoso, com acompanhamento de&nbsp;perto.</p>
               <span class="svc__more">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </div>
           </a>
         </div>
+
+        <ul class="also">
+          <li class="also__item"><span>Ronco e apneia do&nbsp;sono</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li class="also__item"><span>Rinite e&nbsp;sinusite</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li class="also__item"><span>Tontura e&nbsp;zumbido</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li class="also__item"><span>Voz, fala e&nbsp;rouquidão</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+        </ul>
       </div>
     </section>
 
-    <!-- ============ COMO FUNCIONA ============ -->
-    <section class="steps">
+    <!-- ================= PARA AS MÃES ================= -->
+    <section class="moms">
+      <div class="container moms__grid">
+        <div class="moms__text">
+          <h2 class="section-title split-words">Seu filho ronca, respira pela boca ou vive com dor de&nbsp;ouvido?</h2>
+          <p class="reveal-up">Esses sinais atrapalham o sono e, com ele, a escola e o humor da criança. Na consulta, a Dra. Alice examina, explica o que encontrou e diz quando vale tratar e quando vale só&nbsp;acompanhar.</p>
+          <ul class="checks">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Ronco frequente</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Boca aberta ao dormir</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Infecções de garganta repetidas</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Otites de repetição</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Nariz sempre entupido</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Cansaço ou irritação durante o&nbsp;dia</li>
+          </ul>
+          <a href="#" class="btn btn--primary reveal-up js-whats" data-msg="Olá! Gostaria de agendar uma consulta para meu filho(a) com a Dra. Alice.">
+            <span class="btn__label">Agendar para meu filho</span>
+            <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+        <figure class="arch arch--moms">
+          <img src="assets/alice-maes.webp" alt="Dra. Alice Werneck segura um otoscópio perto do rosto" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= DEPOIMENTOS ================= -->
+    <section class="reviews">
       <div class="container">
-        <h2 class="section-title split-words">Do primeiro contato ao&nbsp;tratamento</h2>
-        <ol class="steps__list">
-          <li class="step">
-            <span class="step__num">1</span>
-            <div><h3>Agende pelo WhatsApp</h3><p>Resposta rápida e horários para toda a&nbsp;família.</p></div>
-          </li>
-          <li class="step">
-            <span class="step__num">2</span>
-            <div><h3>Consulta sem pressa</h3><p>Escuta atenta, exame completo e, se preciso, exames na própria&nbsp;clínica.</p></div>
-          </li>
-          <li class="step">
-            <span class="step__num">3</span>
-            <div><h3>Plano de cuidado claro</h3><p>Tratamento clínico ou cirúrgico explicado passo a&nbsp;passo.</p></div>
-          </li>
-        </ol>
-        <div class="steps__progress" aria-hidden="true"><span></span></div>
+        <h2 class="section-title split-words">Avaliações de pacientes</h2>
+        <div class="reviews__grid">
+          <blockquote class="review hover-card">
+            <span class="stars" aria-label="5 de 5 estrelas">★★★★★</span>
+            <p>Atendimento atencioso do início ao fim, com explicações claras e sem&nbsp;pressa.</p>
+          </blockquote>
+          <blockquote class="review hover-card">
+            <span class="stars" aria-label="5 de 5 estrelas">★★★★★</span>
+            <p>Consulta pontual e bem conduzida. Saí com os próximos passos&nbsp;definidos.</p>
+          </blockquote>
+          <blockquote class="review hover-card">
+            <span class="stars" aria-label="5 de 5 estrelas">★★★★★</span>
+            <p>Ambiente tranquilo e avaliação cuidadosa. Dá segurança em cada&nbsp;etapa.</p>
+          </blockquote>
+        </div>
       </div>
     </section>
 
-    <!-- ============ CONTATO / LOCAL ============ -->
-    <section class="contact" id="contato">
-      <div class="container contact__grid">
-        <div class="contact__text">
-          <h2 class="contact__title split-words">Vamos cuidar da sua saúde e da sua&nbsp;família?</h2>
-          <p class="reveal-up">Clínica de otorrino no bairro Alto dos Passos, em Juiz de Fora. Também atendo em São&nbsp;João.</p>
-          <div class="contact__ctas reveal-up">
-            <a href="#" class="btn btn--light js-whats" data-msg="Olá! Gostaria de agendar uma consulta com a Dra. Alice.">
-              <span class="btn__label">Agendar pelo WhatsApp</span>
-              <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a href="https://www.google.com/maps/search/?api=1&query=Alto+dos+Passos+Juiz+de+Fora+MG" target="_blank" rel="noopener" class="btn btn--outline-light">
-              <span class="btn__label">Como chegar</span>
-              <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
-            </a>
+    <!-- ================= CLÍNICA ================= -->
+    <section class="clinic" id="clinica">
+      <div class="container clinic__grid">
+        <div>
+          <h2 class="section-title split-words">Consultório no bairro&nbsp;Passos</h2>
+          <dl class="info">
+            <div class="info__row reveal-up">
+              <dt><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Endereço</dt>
+              <dd>R. Morais e Castro, 506, Passos, Juiz de Fora, MG, 36025&#8209;160</dd>
+            </div>
+            <div class="info__row reveal-up">
+              <dt><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Horário</dt>
+              <dd>Segunda a sexta, das 08:00 às 17:00. Sábado e domingo&nbsp;fechado.</dd>
+            </div>
+            <div class="info__row reveal-up">
+              <dt><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>Convênios</dt>
+              <dd class="pills"><span>Unimed</span><span>Sabin Sinai</span><span>Plasc</span><span>Casembrapa</span><span>Fundaffemg</span><span>Amil</span></dd>
+            </div>
+          </dl>
+          <div class="clinic__ctas reveal-up">
+            <a href="#" class="btn btn--primary js-whats"><span class="btn__label">Agendar consulta</span><span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+            <a href="https://www.google.com/maps/search/?api=1&query=R.+Morais+e+Castro,+506,+Passos,+Juiz+de+Fora,+MG" target="_blank" rel="noopener" class="btn btn--ghost"><span class="btn__label">Abrir no Google Maps</span><span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></a>
           </div>
         </div>
-        <div class="contact__map reveal-up">
-          <iframe title="Mapa: Alto dos Passos, Juiz de Fora" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=Alto+dos+Passos,+Juiz+de+Fora+-+MG&output=embed"></iframe>
+        <div class="map reveal-up">
+          <iframe title="Mapa do consultório da Dra. Alice Werneck" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=R.+Morais+e+Castro,+506,+Passos,+Juiz+de+Fora+-+MG&output=embed"></iframe>
         </div>
+      </div>
+    </section>
+
+    <!-- ================= DÚVIDAS ================= -->
+    <section class="faq" id="duvidas">
+      <div class="container faq__wrap">
+        <h2 class="section-title split-words">Dúvidas frequentes</h2>
+        <!-- CONFIRMAR as respostas com a clínica antes de publicar -->
+        <div class="faq__list">
+          <details class="qa">
+            <summary>A partir de que idade a Dra. Alice atende crianças?<i aria-hidden="true"></i></summary>
+            <div class="qa__a"><p>A Dra. Alice atende crianças, adultos e idosos. Para confirmar a partir de que idade o atendimento é indicado no caso do seu filho, fale com a clínica pelo&nbsp;WhatsApp.</p></div>
+          </details>
+          <details class="qa">
+            <summary>Atende convênio?<i aria-hidden="true"></i></summary>
+            <div class="qa__a"><p>Sim. Unimed, Sabin Sinai, Plasc, Casembrapa, Fundaffemg e Amil. Confirme a cobertura do seu plano pelo WhatsApp antes da&nbsp;consulta.</p></div>
+          </details>
+          <details class="qa">
+            <summary>Como funciona o teste de alergia?<i aria-hidden="true"></i></summary>
+            <div class="qa__a"><p>Pequenas gotas com os alérgenos mais comuns são aplicadas na pele do braço, e a leitura é feita em poucos minutos, no próprio consultório. A Dra. Alice explica antes se é preciso suspender algum&nbsp;remédio.</p></div>
+          </details>
+          <details class="qa">
+            <summary>Como é a recuperação da cirurgia de amígdala?<i aria-hidden="true"></i></summary>
+            <div class="qa__a"><p>Costuma levar de uma a duas semanas, com alimentação mais fria e pastosa nos primeiros dias. Todas as orientações são passadas por escrito e acompanhadas no&nbsp;retorno.</p></div>
+          </details>
+          <details class="qa">
+            <summary>Preciso de encaminhamento?<i aria-hidden="true"></i></summary>
+            <div class="qa__a"><p>Para consulta particular, não. Alguns convênios podem pedir guia ou encaminhamento: a clínica confirma isso com você no&nbsp;agendamento.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA FINAL ================= -->
+    <section class="final">
+      <div class="container final__inner">
+        <h2 class="final__title split-words">Sua saúde começa por uma boa&nbsp;escuta</h2>
+        <p class="reveal-up">Atendimento em Juiz de Fora, no bairro Passos. Mande uma mensagem pelo WhatsApp para ver os horários e confirmar o seu&nbsp;convênio.</p>
+        <a href="#" class="btn btn--light reveal-up js-whats"><span class="btn__label">Agendar consulta</span><span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="container footer__inner">
-      <div>
-        <p class="brand__name">Dra. Alice Werneck</p>
-        <p class="footer__small">Otorrinolaringologista · CRM-MG 00000 · RQE 00000</p>
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <span class="logo logo--light" aria-hidden="true"></span>
+          <p class="footer__small">Otorrinolaringologia e Alergologia<br />CRM-MG 109116 | RQE 68427</p>
+        </div>
+        <div class="footer__small">
+          <p>R. Morais e Castro, 506, Passos,<br />Juiz de Fora, MG, 36025&#8209;160</p>
+          <p>Segunda a sexta, das 08:00 às 17:00</p>
+        </div>
+        <div class="footer__links">
+          <a href="#" class="js-whats">WhatsApp (32) 99821&#8209;7781</a>
+          <a href="https://instagram.com/dra.alicewerneck" target="_blank" rel="noopener">Instagram @dra.alicewerneck</a>
+          <a href="#">Política de Privacidade (LGPD)</a>
+        </div>
       </div>
-      <nav class="footer__nav" aria-label="Rodapé">
-        <a href="#sobre">Sobre</a><a href="#tratamentos">Tratamentos</a><a href="#contato">Contato</a>
-        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
-      </nav>
-      <p class="footer__small">© <span id="year"></span> Dra. Alice Werneck. Todos os direitos reservados.</p>
+      <p class="footer__big" aria-hidden="true"><span class="js-letters">Alice Werneck</span></p>
+      <p class="footer__legal">Responsável técnica: Dra. Alice Werneck, CRM-MG 109116 · © <span id="year"></span></p>
     </div>
   </footer>
 
-  <!-- WhatsApp flutuante -->
-  <a href="#" class="whats-float js-whats" data-msg="Olá! Gostaria de agendar uma consulta com a Dra. Alice." aria-label="Falar no WhatsApp">
+  <a href="#" class="whats-float js-whats" aria-label="Falar no WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l1.6-4.6A8.5 8.5 0 1 1 8 19.6z"/></svg>
     <span>WhatsApp</span>
   </a>

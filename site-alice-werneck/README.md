@@ -3,11 +3,11 @@
 Site estático (HTML + CSS + JS), sem build. Para publicar na Hostinger, envie **o conteúdo desta pasta** para `public_html`.
 
 ## Antes de publicar
-1. **WhatsApp:** troque `WHATSAPP_NUMBER` no topo de `js/main.js`.
-2. **Foto da doutora:** `assets/dra-alice.jpg` (vertical, ~900x1200).
-3. **Fotos dos tratamentos** (opcional): `assets/servicos/amigdala.jpg`, `teste-alergia.jpg`, `audiometria.jpg`, `sono.jpg`, `tontura.jpg`, `exames.jpg`. Sem a foto, o card usa a cor da marca com um ícone.
-4. **Fonte Miamo:** `fonts/Miamo-Thin.woff2` (e `.woff`). Sem o arquivo, o site usa Cormorant Garamond.
-5. **Rodapé:** CRM/RQE e link do Instagram em `index.html`.
+1. **Respostas do FAQ** (`index.html`, seção Dúvidas): confirmar com a clínica.
+2. **Fonte Miamo:** `fonts/Miamo-Thin.woff2` (e `.woff`). Sem o arquivo, o site usa Cormorant Garamond.
+3. **Política de Privacidade (LGPD):** apontar o link do rodapé para a página certa.
+
+Conteúdo, fotos, logo, CRM/RQE, endereço, convênios e WhatsApp (32) 99821-7781 vieram do site atual (Lovable).
 
 ## Animações
 GSAP + ScrollTrigger + Lenis já estão em `js/vendor/`, sem CDN. No celular, o efeito de hover dos cards
