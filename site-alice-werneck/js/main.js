@@ -164,20 +164,15 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
   tl.fromTo(".hero-photo__frame", { clipPath: "inset(100% 0% 0% 0% round 999px 999px 18px 18px)" },
       { clipPath: "inset(0% 0% 0% 0% round 999px 999px 18px 18px)", duration: 1.6, ease: "expo.inOut" }, 0.1)
     .from(".hero-photo__frame img", { scale: 1.2, duration: 2, ease: EASE }, 0.2)
-    // a entrada do contorno mexe só na opacidade; o movimento vertical fica só com o scroll
-    // (antes as duas animações disputavam a mesma propriedade e a foto "travava")
     .from(".hero-photo__outline", { opacity: 0, duration: 1.2, ease: "power2.out" }, 0.9);
-
-  // parallax leve: a foto e o contorno andam em velocidades diferentes (scrub suavizado)
-  gsap.fromTo(".hero-photo__frame img", { yPercent: -8 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 } });
-  gsap.fromTo(".hero-photo__outline", { y: 0 }, { y: () => (innerWidth < 1020 ? -10 : -40), ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6, invalidateOnRefresh: true } });
+  // Depois da abertura, a foto do hero fica parada: nada nela se mexe com o scroll
+  // (é o que deixa a rolagem limpa, sem a foto "pular").
 
   /* ---------- Faixa de condições: anda com o scroll (para frente e para trás) ---------- */
   gsap.fromTo(".marquee__track", { xPercent: 0 }, {
     xPercent: -35, ease: "none",
     scrollTrigger: { trigger: ".marquee", start: "top bottom", end: "bottom top", scrub: 0.6 },
   });
-  gsap.to(".hero__text", { yPercent: 10, opacity: 0.3, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 } });
 
   /* ---------- Manifesto: as palavras "acendem" conforme o scroll ---------- */
   $$(".js-manifesto").forEach((el) => {
@@ -220,15 +215,6 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
     gsap.fromTo($("img", arch), { yPercent: -10 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: arch, start: "top bottom", end: "bottom top", scrub: true } });
   });
 
-  /* ---------- Números: o bloco aparece com um fade simples e os números contam ---------- */
-  gsap.from(".numbers", { opacity: 0, y: 20, duration: 1, ease: "power2.out", scrollTrigger: { trigger: ".numbers", start: "top 85%", once: true } });
-  ScrollTrigger.create({
-    trigger: ".numbers", start: "top 85%", once: true,
-    onEnter: () => $$(".numbers .js-count").forEach((el) => {
-      const o = { v: 0 };
-      gsap.to(o, { v: +el.dataset.to, duration: 1.8, ease: "power2.out", onUpdate: () => (el.textContent = Math.round(o.v)) });
-    }),
-  });
   /* ---------- Credenciais: fade simples ---------- */
   gsap.from(".stats", { opacity: 0, y: 16, duration: 1, ease: "power2.out", scrollTrigger: { trigger: ".stats", start: "top 90%", once: true } });
 
