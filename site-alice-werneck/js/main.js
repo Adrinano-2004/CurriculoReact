@@ -107,6 +107,27 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
     });
   });
 
+  /* ---------- Lista de atendimentos: hover troca a foto (ref. ApexCare) ---------- */
+  const rows = $$(".row");
+  const imgA = $("#svcImg"), imgB = $("#svcImg2");
+  let front = imgA;
+  imgB.classList.add("is-out");
+  const showRow = (row) => {
+    rows.forEach((r) => r.classList.toggle("is-on", r === row));
+    const src = row.dataset.img;
+    if (!src || front.getAttribute("src") === src) return;
+    const back = front === imgA ? imgB : imgA;
+    back.src = src;
+    back.classList.remove("is-out");
+    front.classList.add("is-out");
+    front = back;
+  };
+  rows.forEach((r) => {
+    r.addEventListener("mouseenter", () => showRow(r));
+    r.addEventListener("focus", () => showRow(r));
+  });
+  if (rows[0] && !isTouch) showRow(rows[0]);
+
   /* ---------- Divide títulos em palavras e o nome do rodapé em letras ---------- */
   $$(".split-words").forEach((el) => {
     el.innerHTML = el.textContent.trim().split(/ +/).map((w) => `<span class="w"><span>${w}</span></span>`).join(" ");
@@ -247,16 +268,24 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
     gsap.fromTo($("img", arch), { yPercent: -10 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: arch, start: "top bottom", end: "bottom top", scrub: true } });
   });
 
-  /* ---------- Credenciais: contador + letras decodificando ---------- */
+  /* ---------- Credenciais: letras decodificando ---------- */
   ScrollTrigger.create({
     trigger: ".stats", start: "top 82%", once: true,
-    onEnter: () => {
-      $$(".js-count").forEach((el) => {
-        const o = { v: 0 };
-        gsap.to(o, { v: +el.dataset.to, duration: 1.8, ease: "power2.out", onUpdate: () => (el.textContent = Math.round(o.v)) });
-      });
-      $$(".js-scramble").forEach((el, i) => scramble(el, el.dataset.text, i * 0.15));
-    },
+    onEnter: () => $$(".js-scramble").forEach((el, i) => scramble(el, el.dataset.text, i * 0.15)),
+  });
+
+  /* ---------- Números grandes crescendo (ref. medical.framer.media) ---------- */
+  const nums = $$(".num");
+  nums.forEach((n) => n.style.setProperty("--line-s", 0));
+  ScrollTrigger.create({
+    trigger: ".numbers", start: "top 85%", once: true,
+    onEnter: () => nums.forEach((n, i) => {
+      const el = $(".js-count", n), o = { v: 0, s: 0 };
+      gsap.from($(".num__value", n), { yPercent: 40, opacity: 0, duration: 1.2, ease: EASE, delay: i * 0.12 });
+      gsap.from($(".num__label", n), { y: 14, opacity: 0, duration: 1, ease: EASE, delay: 0.25 + i * 0.12 });
+      gsap.to(o, { s: 1, duration: 1.2, ease: "power3.inOut", delay: i * 0.12, onUpdate: () => n.style.setProperty("--line-s", o.s) });
+      gsap.to(o, { v: +el.dataset.to, duration: 2.2, ease: "power3.out", delay: i * 0.12, onUpdate: () => (el.textContent = Math.round(o.v)) });
+    }),
   });
   gsap.from(".stat", { y: 24, opacity: 0, duration: 1.1, ease: EASE, stagger: 0.1, scrollTrigger: { trigger: ".stats", start: "top 86%", once: true } });
 
@@ -271,7 +300,16 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
   }
 
   /* ---------- Cards entrando em sequência ---------- */
-  [".audience__grid", ".services__grid", ".also", ".reviews__grid"].forEach((sel) => {
+  /* ---------- Órbitas girando devagar + ícones flutuando ---------- */
+  gsap.to(".orbit ellipse", { rotation: 360, svgOrigin: "100 100", duration: (i) => 60 + i * 25, ease: "none", repeat: -1 });
+  gsap.from(".badge", { scale: 0, opacity: 0, duration: 1, ease: "back.out(2)", stagger: 0.15, scrollTrigger: { trigger: ".orbit-wrap", start: "top 75%", once: true } });
+  gsap.to(".badge", { y: (i) => [-10, 8, -7][i], duration: (i) => 2.6 + i * 0.4, ease: "sine.inOut", yoyo: true, repeat: -1 });
+  gsap.from(".orbit", { scale: 0.85, opacity: 0, duration: 1.6, ease: EASE, scrollTrigger: { trigger: ".orbit-wrap", start: "top 80%", once: true } });
+
+  /* ---------- Lista de atendimentos ---------- */
+  gsap.from(".rows li", { y: 24, opacity: 0, duration: 0.9, ease: EASE, stagger: 0.05, scrollTrigger: { trigger: ".rows", start: "top 85%", once: true } });
+
+  [".audience__grid", ".services__grid", ".reviews__grid"].forEach((sel) => {
     const grid = $(sel);
     gsap.from(grid.children, {
       y: 60, opacity: 0, duration: 1.2, ease: EASE, stagger: 0.09, clearProps: "transform,opacity",
@@ -283,6 +321,10 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
   if (isTouch) {
     $$(".hover-card").forEach((card) => {
       ScrollTrigger.create({ trigger: card, start: "top 62%", end: "bottom 38%", toggleClass: { targets: card, className: "is-active" } });
+    });
+    // linhas da lista abrem quando passam pelo meio da tela
+    rows.forEach((r) => {
+      ScrollTrigger.create({ trigger: r, start: "top 50%", end: "bottom 50%", toggleClass: { targets: r, className: "is-on" } });
     });
   }
 
