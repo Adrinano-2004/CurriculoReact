@@ -52,7 +52,7 @@ p, li, dd, blockquote { text-wrap: pretty; }
 h1, h2, h3 { font-family: var(--f-display); font-weight: 300; margin: 0; line-height: 1.05; letter-spacing: -.01em; color: var(--navy); }
 p { margin: 0 0 1em; }
 .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
-.section-title { font-size: clamp(2.1rem, 4.4vw, 3.5rem); max-width: 17ch; }
+.section-title { font-size: clamp(2.1rem, 4.4vw, 3.5rem); max-width: 40ch; }
 .kicker { font-size: .78rem; letter-spacing: .08em; color: var(--wine); font-weight: 500; margin-bottom: 1.4rem; }
 .crm { font-size: .78rem; color: var(--muted); letter-spacing: .04em; margin: 0; }
 
@@ -141,11 +141,20 @@ p { margin: 0 0 1em; }
 .hero__ctas { display: flex; flex-wrap: wrap; gap: .8rem; margin-bottom: 1.6rem; }
 
 /* Retrato em barras (onda sonora) */
-.wave { position: relative; width: 100%; max-width: 520px; justify-self: end; aspect-ratio: 4 / 5; }
-.wave__fallback { width: 100%; height: 100%; object-fit: cover; border-radius: 999px 999px var(--radius) var(--radius); }
-.wave.is-ready .wave__fallback { display: none; }
-.wave__bar { position: absolute; top: 0; overflow: hidden; border-radius: 999px; background: var(--sand); will-change: transform; transform-origin: 50% 50%; }
-.wave__bar img { position: absolute; max-width: none; object-fit: cover; pointer-events: none; user-select: none; }
+/* Retrato inteiro em arco, com contorno deslocado e selo flutuante */
+.hero-photo { position: relative; margin: 0; width: 100%; max-width: 460px; justify-self: end; }
+.hero-photo__frame { position: relative; z-index: 1; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 999px 999px var(--radius) var(--radius); background: var(--sand); box-shadow: 0 40px 80px -50px rgba(8,49,72,.55); }
+.hero-photo__frame img { width: 100%; height: 115%; max-width: none; object-fit: cover; object-position: 50% 20%; will-change: transform; }
+.hero-photo__outline { position: absolute; inset: 0; transform: translate(22px, 22px); border: 1px solid rgba(105,27,38,.35); border-radius: 999px 999px var(--radius) var(--radius); }
+.hero-photo__chip {
+  position: absolute; z-index: 2; left: -1.6rem; bottom: 2.2rem; margin: 0;
+  display: inline-flex; align-items: center; gap: .6rem; padding: .75rem 1.1rem; border-radius: 999px;
+  background: rgba(248,246,242,.9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  font-size: .8rem; font-weight: 400; color: var(--navy); box-shadow: 0 18px 40px -20px rgba(8,49,72,.4);
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #3c8d6b; position: relative; flex: none; }
+.dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: ping 2s var(--ease) infinite; }
+@keyframes ping { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(3); opacity: 0; } }
 
 /* ================= STATS ================= */
 .stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #F4F1EC; }
@@ -198,7 +207,7 @@ p { margin: 0 0 1em; }
 
 /* ================= MARQUEE ================= */
 .marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1.3rem 0; background: var(--sand); }
-.marquee__track { display: flex; align-items: center; gap: 2.2rem; width: max-content; animation: marquee 40s linear infinite; }
+.marquee__track { display: flex; align-items: center; gap: 2.2rem; width: max-content; will-change: transform; }
 .marquee__track span { font-family: var(--f-display); font-size: clamp(1.6rem, 3vw, 2.4rem); color: var(--navy); white-space: nowrap; font-style: italic; }
 .marquee__track i { width: 7px; height: 7px; border-radius: 50%; background: var(--wine); flex: none; }
 @keyframes marquee { to { transform: translateX(-50%); } }
@@ -234,7 +243,7 @@ p { margin: 0 0 1em; }
 /* ================= PARA AS MÃES ================= */
 .moms { background: var(--sand); padding: var(--section) 0; border-radius: 28px; margin: 0 clamp(8px, 1.4vw, 20px); }
 .moms__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
-.moms__text .section-title { margin-bottom: 1.4rem; max-width: 19ch; }
+.moms__text .section-title { margin-bottom: 1.4rem; }
 .moms__text > p { color: var(--muted); max-width: 46ch; }
 .checks { list-style: none; padding: 0; margin: 1.8rem 0 2.2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.6rem; }
 .checks li { display: flex; align-items: center; gap: .8rem; padding: .85rem 0; border-bottom: 1px solid rgba(8,49,72,.14); font-size: .92rem; color: var(--navy); }
@@ -317,7 +326,7 @@ p { margin: 0 0 1em; }
   .header__cta { display: none; }
 
   .hero__grid, .about__grid, .moms__grid, .clinic__grid, .faq__wrap { grid-template-columns: 1fr; }
-  .wave { justify-self: center; max-width: 420px; }
+  .hero-photo { justify-self: center; max-width: 400px; margin-top: 1rem; }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
   .stat:nth-child(3)::before { display: none; }
   .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
@@ -336,7 +345,9 @@ p { margin: 0 0 1em; }
   .hero { padding-top: calc(var(--header-h) + 18px); }
   .hero__title { font-size: clamp(2.5rem, 12vw, 3.3rem); }
   .hero__ctas .btn { flex: 1 1 100%; justify-content: space-between; }
-  .wave { max-width: 330px; aspect-ratio: 4 / 4.4; }
+  .hero-photo { max-width: 300px; }
+  .hero-photo__outline { transform: translate(14px, 14px); }
+  .hero-photo__chip { left: 0; right: 0; margin: 0 auto; width: max-content; bottom: 1.2rem; white-space: nowrap; }
   .audience__grid, .services__grid, .reviews__grid, .also, .checks, .footer__grid { grid-template-columns: 1fr; }
   .aud-card { min-height: 0; }
   .svc { min-height: 380px; }

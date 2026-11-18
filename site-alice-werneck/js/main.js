@@ -136,56 +136,6 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
     el.innerHTML = [...el.textContent].map((c) => `<span class="ch">${c === " " ? "&nbsp;" : c}</span>`).join("");
   });
 
-  /* ---------- HERO: retrato em barras de "onda sonora" ---------- */
-  const wave = $("#wave");
-  const waveSrc = $(".wave__fallback", wave).getAttribute("src");
-  const SHAPE = [0.56, 0.76, 0.9, 1, 0.92, 0.78, 0.6];
-  let bars = [];
-  let idleTweens = [];
-
-  function buildWave() {
-    $$(".wave__bar", wave).forEach((b) => b.remove());
-    idleTweens.forEach((t) => t.kill());
-    idleTweens = [];
-    const W = wave.clientWidth, H = wave.clientHeight;
-    const n = SHAPE.length, gap = Math.max(6, W * 0.022), bw = (W - gap * (n - 1)) / n;
-    bars = SHAPE.map((f, i) => {
-      const b = document.createElement("div");
-      b.className = "wave__bar";
-      const left = i * (bw + gap);
-      b.style.cssText = `left:${left}px;width:${bw}px;height:${H}px`;
-      b.dataset.inset = ((1 - f) * H) / 2;
-      const img = document.createElement("img");
-      img.src = waveSrc; img.alt = ""; img.setAttribute("aria-hidden", "true");
-      img.style.cssText = `width:${W}px;height:${H}px;left:${-left}px;top:0`;
-      b.appendChild(img);
-      wave.appendChild(b);
-      setInset(b, +b.dataset.inset);
-      return b;
-    });
-    wave.classList.add("is-ready");
-  }
-  function setInset(b, px) { b.style.clipPath = `inset(${px}px 0px ${px}px 0px round 999px)`; }
-
-  function idleWave() {
-    // respiração bem sutil das barras, como níveis de áudio
-    bars.forEach((b, i) => {
-      const base = +b.dataset.inset;
-      const o = { v: base };
-      idleTweens.push(gsap.to(o, {
-        v: base + gsap.utils.random(-14, 14), duration: gsap.utils.random(1.6, 2.6), ease: "sine.inOut",
-        yoyo: true, repeat: -1, delay: i * 0.12, onUpdate: () => setInset(b, Math.max(0, o.v)),
-      }));
-    });
-  }
-
-  buildWave();
-  let rT;
-  addEventListener("resize", () => {
-    clearTimeout(rT);
-    rT = setTimeout(() => { buildWave(); if (animate) idleWave(); }, 200);
-  });
-
   /* ---------- Sem animação: mostra tudo e encerra ---------- */
   if (!animate) {
     $$(".reveal-up, .reveal-fade").forEach((el) => (el.style.opacity = 1));
@@ -203,27 +153,21 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
     .to(".hero .reveal-fade", { opacity: 1, duration: 1, stagger: 0.08 }, 0.7)
     .from(".hero .reveal-fade", { y: 18, duration: 1.2, stagger: 0.08 }, 0.7);
 
-  // barras crescem do centro para fora, depois ficam "respirando"
-  bars.forEach((b) => setInset(b, wave.clientHeight / 2));
-  const waveIn = { p: 0 };
-  tl.to(waveIn, {
-    p: 1, duration: 1.8, ease: "expo.out",
-    onUpdate: () => bars.forEach((b, i) => {
-      const H = wave.clientHeight, target = +b.dataset.inset;
-      const dist = Math.abs(i - (bars.length - 1) / 2) / bars.length;     // centro primeiro
-      const local = gsap.utils.clamp(0, 1, (waveIn.p - dist * 0.6) / 0.7);
-      setInset(b, H / 2 - (H / 2 - target) * gsap.parseEase("expo.out")(local));
-    }),
-    onComplete: idleWave,
-  }, 0.1);
+  // foto inteira: o arco se abre de baixo para cima e a foto assenta (zoom suave)
+  tl.fromTo(".hero-photo__frame", { clipPath: "inset(100% 0% 0% 0% round 999px 999px 18px 18px)" },
+      { clipPath: "inset(0% 0% 0% 0% round 999px 999px 18px 18px)", duration: 1.6, ease: "expo.inOut" }, 0.1)
+    .from(".hero-photo__frame img", { scale: 1.25, duration: 2.2, ease: EASE }, 0.2)
+    .from(".hero-photo__outline", { opacity: 0, x: -18, y: -18, duration: 1.4, ease: EASE }, 0.9)
+    .from(".hero-photo__chip", { opacity: 0, y: 16, duration: 1, ease: EASE }, 1.2);
 
-  // parallax: cada barra sobe numa velocidade diferente
-  ScrollTrigger.create({
-    trigger: ".hero", start: "top top", end: "bottom top", scrub: true,
-    onUpdate: (self) => bars.forEach((b, i) => {
-      const k = [0.6, 1.2, 0.4, 0.9, 0.5, 1.1, 0.7][i % 7];
-      b.style.transform = `translateY(${-self.progress * 120 * k}px)`;
-    }),
+  // parallax leve: a foto e o contorno andam em velocidades diferentes
+  gsap.fromTo(".hero-photo__frame img", { yPercent: -8 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  gsap.to(".hero-photo__outline", { y: () => (innerWidth < 1020 ? -10 : -50), ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+  /* ---------- Faixa de condições: anda com o scroll (para frente e para trás) ---------- */
+  gsap.fromTo(".marquee__track", { xPercent: 0 }, {
+    xPercent: -35, ease: "none",
+    scrollTrigger: { trigger: ".marquee", start: "top bottom", end: "bottom top", scrub: 0.6 },
   });
   gsap.to(".hero__text", { yPercent: 10, opacity: 0.3, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 
