@@ -203,11 +203,7 @@ p { margin: 0 0 1em; }
 .aud-card__index { font-size: .75rem; letter-spacing: .2em; color: var(--wine); font-weight: 500; transition: color .6s var(--ease); }
 .aud-card__title { font-size: clamp(2rem, 3vw, 2.5rem); margin: auto 0 .6rem; padding-top: 2.5rem; transition: color .6s var(--ease); }
 .aud-card__text { color: var(--muted); font-size: .94rem; margin: 0; transition: color .6s var(--ease); }
-.aud-card:hover .aud-card__in, .aud-card.is-active .aud-card__in, .aud-card:focus-visible .aud-card__in { transform: translateY(-10px); background: var(--navy); border-color: var(--navy); box-shadow: 0 30px 60px -30px rgba(8,49,72,.6); }
-.aud-card:hover .aud-card__in::after, .aud-card.is-active .aud-card__in::after { width: calc(100% - 3.6rem); background: var(--sand); }
-.aud-card:hover .aud-card__title, .aud-card.is-active .aud-card__title { color: var(--ice); }
-.aud-card:hover .aud-card__text, .aud-card.is-active .aud-card__text { color: rgba(239,236,231,.75); }
-.aud-card:hover .aud-card__index, .aud-card.is-active .aud-card__index { color: var(--sand); }
+/* Cards "Crianças / Adultos / Idosos": estáticos, sem efeito de hover nem de scroll */
 
 /* ================= MARQUEE ================= */
 .marquee { overflow: hidden; padding: 1.3rem 0; background: var(--ice); }
