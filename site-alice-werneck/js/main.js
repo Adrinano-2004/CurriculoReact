@@ -43,16 +43,23 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
     }
   }
 
-  /* ---------- Menu mobile ---------- */
+  /* ---------- Menu lateral (celular) ---------- */
   const burger = $("#burger");
-  const nav = $("#nav");
+  const nav = $("#drawer");
+  const overlay = $("#drawerOverlay");
   const setMenu = (open) => {
     burger.setAttribute("aria-expanded", String(open));
     nav.classList.toggle("is-open", open);
+    overlay.classList.toggle("is-open", open);
+    nav.setAttribute("aria-hidden", String(!open));
     document.body.style.overflow = open ? "hidden" : "";
     if (lenis) open ? lenis.stop() : lenis.start();
+    if (open) setTimeout(() => $("#drawerClose").focus(), 300);
   };
-  burger.addEventListener("click", () => setMenu(burger.getAttribute("aria-expanded") !== "true"));
+  burger.addEventListener("click", () => setMenu(true));
+  $("#drawerClose").addEventListener("click", () => setMenu(false));
+  overlay.addEventListener("click", () => setMenu(false));
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && nav.classList.contains("is-open")) setMenu(false); });
 
   $$('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
