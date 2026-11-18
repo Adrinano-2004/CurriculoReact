@@ -276,7 +276,7 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
   gsap.from(".pills span", { scale: 0.6, opacity: 0, duration: 0.7, ease: "back.out(2)", stagger: 0.05, scrollTrigger: { trigger: ".pills", start: "top 90%", once: true } });
 
   /* ---------- Seções com cantos que se abrem ao entrar ---------- */
-  [".moms", ".final"].forEach((sel) => {
+  [".final"].forEach((sel) => {
     gsap.from(sel, { borderRadius: "90px", ease: "none", scrollTrigger: { trigger: sel, start: "top bottom", end: "top 40%", scrub: true } });
   });
 

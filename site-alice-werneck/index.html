@@ -103,9 +103,6 @@
     <!-- ================= MANIFESTO (palavras acendem com o scroll · ref. Lando Norris) ================= -->
     <section class="manifesto" aria-label="Como a Dra. Alice atende">
       <div class="container">
-        <p class="manifesto__text js-manifesto">
-          Ouvir com <em>calma</em>, examinar com <em>cuidado</em> e explicar com <em>clareza</em>, para que cada paciente, da criança ao idoso, volte a <em>respirar</em>, <em>ouvir</em> e <em>dormir&nbsp;bem</em>.
-        </p>
 
         <!-- Números grandes que crescem ao aparecer (ref. medical.framer.media) -->
         <div class="numbers">
@@ -119,7 +116,7 @@
           </div>
           <div class="num">
             <p class="num__value"><span class="js-count" data-to="6">0</span></p>
-            <p class="num__label">convênios aceitos no consultório</p>
+            <p class="num__label">convênios aceitos no&nbsp;consultório</p>
           </div>
         </div>
       </div>
@@ -163,21 +160,21 @@
       <div class="container">
         <h2 class="section-title split-words">Cada fase da vida pede um cuidado&nbsp;diferente</h2>
         <div class="audience__grid">
-          <article class="aud-card hover-card" tabindex="0">
+          <article class="aud-card hover-card" tabindex="0"><div class="aud-card__in">
             <span class="aud-card__index">01</span>
             <h3 class="aud-card__title">Crianças</h3>
             <p class="aud-card__text">Ronco, respiração pela boca, otites e alergias, com uma avaliação que respeita o tempo de cada&nbsp;criança.</p>
-          </article>
-          <article class="aud-card hover-card" tabindex="0">
+          </div></article>
+          <article class="aud-card hover-card" tabindex="0"><div class="aud-card__in">
             <span class="aud-card__index">02</span>
             <h3 class="aud-card__title">Adultos</h3>
             <p class="aud-card__text">Sinusite, rinite, rouquidão, tontura e apneia, com exame e orientação no próprio&nbsp;consultório.</p>
-          </article>
-          <article class="aud-card hover-card" tabindex="0">
+          </div></article>
+          <article class="aud-card hover-card" tabindex="0"><div class="aud-card__in">
             <span class="aud-card__index">03</span>
             <h3 class="aud-card__title">Idosos</h3>
             <p class="aud-card__text">Perda auditiva e zumbido, com audiometria para acompanhar a audição de&nbsp;perto.</p>
-          </article>
+          </div></article>
         </div>
       </div>
     </section>
@@ -198,30 +195,30 @@
         </div>
 
         <div class="services__grid">
-          <a href="#" class="svc hover-card js-whats" data-msg="Olá! Gostaria de saber sobre a cirurgia de amígdala.">
+          <a href="#" class="svc hover-card js-whats" data-msg="Olá! Gostaria de saber sobre a cirurgia de amígdala."><div class="svc__card">
             <img class="svc__img" src="assets/alice-cirurgia.webp" alt="Dra. Alice Werneck durante procedimento cirúrgico" loading="lazy" />
             <div class="svc__body">
               <h3 class="svc__title">Cirurgia de amígdala</h3>
               <p class="svc__desc">Para infecções de garganta repetidas, ronco e apneia, em crianças e&nbsp;adultos.</p>
               <span class="svc__more">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </div>
-          </a>
-          <a href="#" class="svc hover-card js-whats" data-msg="Olá! Gostaria de saber sobre o teste de alergia.">
+          </div></a>
+          <a href="#" class="svc hover-card js-whats" data-msg="Olá! Gostaria de saber sobre o teste de alergia."><div class="svc__card">
             <img class="svc__img" src="assets/alice-teste-alergia.webp" alt="Aplicação de teste de alergia na pele do braço" loading="lazy" />
             <div class="svc__body">
               <h3 class="svc__title">Teste de alergia</h3>
               <p class="svc__desc">Descobre o que desencadeia rinite, asma e crises alérgicas, para tratar a&nbsp;causa.</p>
               <span class="svc__more">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </div>
-          </a>
-          <a href="#" class="svc hover-card js-whats" data-msg="Olá! Gostaria de agendar uma audiometria.">
+          </div></a>
+          <a href="#" class="svc hover-card js-whats" data-msg="Olá! Gostaria de agendar uma audiometria."><div class="svc__card">
             <img class="svc__img" src="assets/alice-exame-ouvido.webp" alt="Dra. Alice Werneck examina o ouvido de uma paciente" loading="lazy" />
             <div class="svc__body">
               <h3 class="svc__title">Audiometria</h3>
               <p class="svc__desc">Avaliação da audição, da criança ao idoso, com acompanhamento de&nbsp;perto.</p>
               <span class="svc__more">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </div>
-          </a>
+          </div></a>
         </div>
 
         <!-- Lista completa (ref. ApexCare): passar o mouse troca a foto ao lado -->
@@ -253,9 +250,11 @@
 
     <!-- ================= PARA AS MÃES ================= -->
     <section class="moms">
+      <div class="container">
+        <h2 class="section-title moms__title split-words">Seu filho ronca, respira pela boca ou vive com dor de&nbsp;ouvido?</h2>
+      </div>
       <div class="container moms__grid">
         <div class="moms__text">
-          <h2 class="section-title split-words">Seu filho ronca, respira pela boca ou vive com dor de&nbsp;ouvido?</h2>
           <p class="reveal-up">Esses sinais atrapalham o sono e, com ele, a escola e o humor da criança. Na consulta, a Dra. Alice examina, explica o que encontrou e diz quando vale tratar e quando vale só&nbsp;acompanhar.</p>
           <ul class="checks">
             <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Ronco frequente</li>
@@ -281,18 +280,18 @@
       <div class="container">
         <h2 class="section-title split-words">Avaliações de pacientes</h2>
         <div class="reviews__grid">
-          <blockquote class="review hover-card">
+          <blockquote class="review hover-card"><div class="review__in">
             <span class="stars" aria-label="5 de 5 estrelas">★★★★★</span>
             <p>Atendimento atencioso do início ao fim, com explicações claras e sem&nbsp;pressa.</p>
-          </blockquote>
-          <blockquote class="review hover-card">
+          </div></blockquote>
+          <blockquote class="review hover-card"><div class="review__in">
             <span class="stars" aria-label="5 de 5 estrelas">★★★★★</span>
             <p>Consulta pontual e bem conduzida. Saí com os próximos passos&nbsp;definidos.</p>
-          </blockquote>
-          <blockquote class="review hover-card">
+          </div></blockquote>
+          <blockquote class="review hover-card"><div class="review__in">
             <span class="stars" aria-label="5 de 5 estrelas">★★★★★</span>
             <p>Ambiente tranquilo e avaliação cuidadosa. Dá segurança em cada&nbsp;etapa.</p>
-          </blockquote>
+          </div></blockquote>
         </div>
       </div>
     </section>
@@ -406,7 +405,6 @@
 
   <a href="#" class="whats-float js-whats" aria-label="Falar no WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l1.6-4.6A8.5 8.5 0 1 1 8 19.6z"/></svg>
-    <span>WhatsApp</span>
   </a>
 
   <script src="js/vendor/gsap.min.js"></script>
