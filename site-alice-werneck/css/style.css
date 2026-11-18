@@ -348,9 +348,8 @@ p { margin: 0 0 1em; }
 
 /* ================= NÚMEROS GRANDES (ref. medical.framer.media) ================= */
 .numbers { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.2rem, 3vw, 3rem); margin-top: clamp(4rem, 9vw, 7rem); }
-.num { position: relative; padding-top: clamp(1.4rem, 3vw, 2.4rem); }
-.num::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--line); transform-origin: left; transform: scaleX(var(--line-s, 1)); }
-.num__value { font-family: var(--f-body); font-weight: 400; font-size: clamp(3.6rem, 8vw, 6.4rem); line-height: 1; letter-spacing: -.045em; color: var(--navy); margin: 0 0 1rem; font-variant-numeric: tabular-nums; }
+.num { position: relative; }
+.num__value { font-family: var(--f-body); font-weight: 400; font-size: clamp(2.6rem, 4.6vw, 3.8rem); line-height: 1; letter-spacing: -.04em; color: var(--navy); margin: 0 0 1rem; font-variant-numeric: tabular-nums; }
 .num__value sup { font-size: .6em; vertical-align: .55em; margin-left: .04em; color: var(--wine); letter-spacing: 0; }
 .num__label { font-size: .92rem; color: var(--muted); margin: 0; max-width: 24ch; }
 

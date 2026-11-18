@@ -274,17 +274,13 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
     onEnter: () => $$(".js-scramble").forEach((el, i) => scramble(el, el.dataset.text, i * 0.15)),
   });
 
-  /* ---------- Números grandes crescendo (ref. medical.framer.media) ---------- */
-  const nums = $$(".num");
-  nums.forEach((n) => n.style.setProperty("--line-s", 0));
+  /* ---------- Números: o bloco aparece com um fade simples e os números contam ---------- */
+  gsap.from(".numbers", { opacity: 0, y: 20, duration: 1, ease: "power2.out", scrollTrigger: { trigger: ".numbers", start: "top 85%", once: true } });
   ScrollTrigger.create({
     trigger: ".numbers", start: "top 85%", once: true,
-    onEnter: () => nums.forEach((n, i) => {
-      const el = $(".js-count", n), o = { v: 0, s: 0 };
-      gsap.from($(".num__value", n), { yPercent: 40, opacity: 0, duration: 1.2, ease: EASE, delay: i * 0.12 });
-      gsap.from($(".num__label", n), { y: 14, opacity: 0, duration: 1, ease: EASE, delay: 0.25 + i * 0.12 });
-      gsap.to(o, { s: 1, duration: 1.2, ease: "power3.inOut", delay: i * 0.12, onUpdate: () => n.style.setProperty("--line-s", o.s) });
-      gsap.to(o, { v: +el.dataset.to, duration: 2.2, ease: "power3.out", delay: i * 0.12, onUpdate: () => (el.textContent = Math.round(o.v)) });
+    onEnter: () => $$(".numbers .js-count").forEach((el) => {
+      const o = { v: 0 };
+      gsap.to(o, { v: +el.dataset.to, duration: 1.8, ease: "power2.out", onUpdate: () => (el.textContent = Math.round(o.v)) });
     }),
   });
   gsap.from(".stat", { y: 24, opacity: 0, duration: 1.1, ease: EASE, stagger: 0.1, scrollTrigger: { trigger: ".stats", start: "top 86%", once: true } });
