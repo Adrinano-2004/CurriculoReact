@@ -412,19 +412,26 @@ p { margin: 0 0 1em; }
 .rows { list-style: none; padding: 0; margin: 0; counter-reset: none; }
 .rows li { border-top: 1px solid var(--line); }
 .rows li:last-child { border-bottom: 1px solid var(--line); }
-/* linhas são só informação (não levam a lugar nenhum): sem seta, sem cursor de link */
-.row { display: grid; grid-template-columns: 2.6rem 1fr; align-items: center; column-gap: .6rem; padding: 1.1rem .4rem; position: relative; isolation: isolate; cursor: default; outline: none; }
-.row::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--white); border-radius: 12px; opacity: 0; transform: scaleY(.6); transition: opacity .5s var(--ease), transform .6s var(--ease); }
+/* Lista de atendimentos: abre só ao tocar/clicar (sanfona), um item por vez.
+   Sem efeito de hover e sem abrir sozinha no scroll. O "+" vira "−" quando aberto. */
+.row { display: grid; grid-template-columns: 2.6rem 1fr 22px; align-items: center; column-gap: .6rem; padding: 1.1rem .4rem; position: relative; isolation: isolate; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; user-select: none; }
+.row:focus-visible { box-shadow: inset 0 0 0 2px var(--wine); border-radius: 12px; }
+.row::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--white); border-radius: 12px; opacity: 0; transition: opacity .4s var(--ease); }
 .row__n { font-family: var(--f-display); font-style: italic; font-size: 1rem; color: var(--wine); }
-.row__t { font-size: 1.02rem; font-weight: 400; color: var(--navy); transition: transform .6s var(--ease), color .4s; }
-.row__a { width: 20px; height: 20px; color: var(--wine); opacity: .35; transition: transform .6s var(--ease), opacity .4s; }
-.row__d { grid-column: 2 / 4; display: grid; grid-template-rows: 0fr; transition: grid-template-rows .6s var(--ease); }
-.row__d > span { overflow: hidden; font-size: .88rem; color: var(--muted); }
-.row:hover::before, .row.is-on::before, .row:focus-visible::before { opacity: 1; transform: none; }
-.row:hover .row__t, .row.is-on .row__t { transform: translateX(6px); color: var(--wine); }
-.row:hover .row__a, .row.is-on .row__a { opacity: 1; transform: rotate(45deg); }
-.row:hover .row__d, .row.is-on .row__d, .row:focus-visible .row__d { grid-template-rows: 1fr; }
-.row:hover .row__d > span, .row.is-on .row__d > span { padding-top: .4rem; }
+.row__t { font-size: 1.02rem; font-weight: 400; color: var(--navy); transition: color .3s; }
+.row::after { /* sinal de + / − */
+  content: ""; grid-column: 3; grid-row: 1; justify-self: end; width: 14px; height: 14px;
+  background: linear-gradient(var(--wine), var(--wine)) center / 14px 1.5px no-repeat,
+              linear-gradient(var(--wine), var(--wine)) center / 1.5px 14px no-repeat;
+  transition: transform .4s var(--ease), background-size .4s var(--ease);
+}
+.row__d { grid-column: 2 / 4; display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s var(--ease); }
+.row__d > span { overflow: hidden; font-size: .88rem; color: var(--muted); transition: padding .5s var(--ease); }
+.row.is-on::before { opacity: 1; }
+.row.is-on .row__t { color: var(--wine); }
+.row.is-on::after { transform: rotate(180deg); background-size: 14px 1.5px, 1.5px 0; }
+.row.is-on .row__d { grid-template-rows: 1fr; }
+.row.is-on .row__d > span { padding-top: .4rem; }
 .svc-list__media { position: sticky; top: 110px; margin: 0; aspect-ratio: 4 / 5; border-radius: 999px 999px var(--radius) var(--radius); overflow: hidden; background: var(--sand); }
 .svc-list__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .7s var(--ease), transform 1.2s var(--ease); }
 .svc-list__media img.is-out { opacity: 0; transform: scale(1.08); }

@@ -121,13 +121,19 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
     });
   });
 
-  /* ---------- Lista de atendimentos: hover troca a foto (ref. ApexCare) ---------- */
+  /* ---------- Lista de atendimentos: abre ao tocar/clicar (um por vez) e troca a foto ---------- */
   const rows = $$(".row");
   const imgA = $("#svcImg"), imgB = $("#svcImg2");
   let front = imgA;
   imgB.classList.add("is-out");
   const showRow = (row) => {
-    rows.forEach((r) => r.classList.toggle("is-on", r === row));
+    const open = !row.classList.contains("is-on"); // tocar de novo no mesmo item fecha
+    rows.forEach((r) => {
+      const on = r === row && open;
+      r.classList.toggle("is-on", on);
+      r.setAttribute("aria-expanded", String(on));
+    });
+    if (!open) return;
     const src = row.dataset.img;
     if (!src || front.getAttribute("src") === src) return;
     const back = front === imgA ? imgB : imgA;
@@ -137,10 +143,13 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
     front = back;
   };
   rows.forEach((r) => {
-    r.addEventListener("mouseenter", () => showRow(r));
-    r.addEventListener("focus", () => showRow(r));
+    r.setAttribute("role", "button");
+    r.setAttribute("aria-expanded", "false");
+    r.addEventListener("click", () => showRow(r));
+    r.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showRow(r); }
+    });
   });
-  if (rows[0] && !isTouch) showRow(rows[0]);
 
   /* ---------- Divide títulos em palavras e o nome do rodapé em letras ---------- */
   $$(".split-words").forEach((el) => {
@@ -247,10 +256,6 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
   if (isTouch) {
     $$(".hover-card").forEach((card) => {
       ScrollTrigger.create({ trigger: card, start: "top 62%", end: "bottom 38%", toggleClass: { targets: card, className: "is-active" } });
-    });
-    // linhas da lista abrem quando passam pelo meio da tela
-    rows.forEach((r) => {
-      ScrollTrigger.create({ trigger: r, start: "top 50%", end: "bottom 50%", toggleClass: { targets: r, className: "is-on" } });
     });
   }
 
