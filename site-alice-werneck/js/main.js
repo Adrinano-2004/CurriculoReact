@@ -252,7 +252,6 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
   gsap.from(".checks path", { strokeDashoffset: 24, duration: 0.6, ease: "power2.out", stagger: 0.08, delay: 0.3, scrollTrigger: { trigger: ".checks", start: "top 85%", once: true } });
 
   /* ---------- Convênios ---------- */
-  gsap.from(".pills span", { y: 14, opacity: 0, duration: 0.8, ease: "power2.out", stagger: 0.05, clearProps: "transform", scrollTrigger: { trigger: ".pills", start: "top 90%", once: true } });
 
   /* ---------- Seções com cantos que se abrem ao entrar ---------- */
   [".final"].forEach((sel) => {
