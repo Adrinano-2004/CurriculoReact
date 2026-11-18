@@ -145,7 +145,8 @@ p { margin: 0 0 1em; }
 .hero-photo { position: relative; margin: 0; width: 100%; max-width: 460px; justify-self: end; }
 .hero-photo__frame { position: relative; z-index: 1; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 999px 999px var(--radius) var(--radius); background: var(--sand); box-shadow: 0 40px 80px -50px rgba(8,49,72,.55); }
 .hero-photo__frame img { width: 100%; height: 115%; max-width: none; object-fit: cover; object-position: 50% 20%; will-change: transform; }
-.hero-photo__outline { position: absolute; inset: 0; transform: translate(22px, 22px); border: 1px solid rgba(105,27,38,.35); border-radius: 999px 999px var(--radius) var(--radius); }
+/* o deslocamento do contorno é feito com "inset" (não com transform), para não brigar com a animação */
+.hero-photo__outline { position: absolute; inset: 22px -22px -22px 22px; border: 1px solid rgba(105,27,38,.35); border-radius: 999px 999px var(--radius) var(--radius); }
 .hero-photo__chip {
   position: absolute; z-index: 2; left: -1.6rem; bottom: 2.2rem; margin: 0;
   display: inline-flex; align-items: center; gap: .6rem; padding: .75rem 1.1rem; border-radius: 999px;
@@ -157,7 +158,8 @@ p { margin: 0 0 1em; }
 @keyframes ping { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(3); opacity: 0; } }
 
 /* ================= STATS ================= */
-.stats { background: var(--ice); }
+/* mesma distância do hero até as credenciais que das credenciais até os números */
+.stats { background: var(--ice); padding-top: clamp(3rem, 8vw, 7rem); }
 .stats__grid { display: grid; grid-template-columns: repeat(4, 1fr); }
 .stat { padding: clamp(1.8rem, 4vw, 3rem) clamp(.5rem, 1.5vw, 1rem); position: relative; text-align: center; }
 .stat__value { font-family: var(--f-display); font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--wine); line-height: 1.1; margin-bottom: .35em; font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -247,14 +249,16 @@ p { margin: 0 0 1em; }
 /* ================= PARA AS MÃES ================= */
 .moms { padding: var(--section) 0; background: var(--ice); }
 .moms__title { margin-bottom: clamp(2rem, 4vw, 3rem); }
-.moms__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+/* a foto acompanha a altura do texto: começa no parágrafo e termina no botão */
+.moms__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem, 6vw, 6rem); align-items: stretch; }
 .moms__text .section-title { margin-bottom: 1.4rem; }
 .moms__text > p { color: var(--muted); max-width: 46ch; }
 .checks { list-style: none; padding: 0; margin: 1.8rem 0 2.2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.6rem; }
 .checks li { display: flex; align-items: center; gap: .8rem; padding: .85rem 0; border-bottom: 1px solid rgba(8,49,72,.14); font-size: .92rem; color: var(--navy); }
 .checks svg { width: 22px; height: 22px; flex: none; padding: 3px; border-radius: 50%; background: var(--wine); stroke: var(--ice); stroke-width: 2.4; }
 .checks svg path { stroke-dasharray: 24; stroke-dashoffset: 0; }
-.arch--moms { aspect-ratio: 3 / 4; max-width: 440px; justify-self: end; width: 100%; }
+.arch--moms { max-width: 440px; justify-self: end; width: 100%; height: 100%; min-height: 420px; }
+.arch--moms img { position: absolute; inset: 0; height: 115%; }
 
 /* ================= DEPOIMENTOS ================= */
 .reviews { padding: var(--section) 0; }
@@ -274,8 +278,21 @@ p { margin: 0 0 1em; }
 .info__row dt svg { width: 20px; height: 20px; color: var(--wine); }
 .info__row dd { margin: .3rem 0 0 calc(20px + .6rem); color: var(--muted); font-size: .94rem; }
 /* 3 por linha: 2 linhas equilibradas, nenhum convênio sobrando sozinho */
-.pills { display: grid; grid-template-columns: repeat(3, max-content); gap: .45rem; padding-top: .3rem; }
-.pills span { text-align: center; padding: .35em .9em; border-radius: 999px; border: 1px solid var(--line); background: var(--white); font-size: .8rem; color: var(--navy); }
+/* Convênios: 3 colunas iguais, nome na fonte de títulos com um check vinho */
+.pills { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; padding-top: .7rem; }
+.pills span {
+  display: flex; align-items: center; gap: .6rem; padding: .85rem 1rem; border-radius: 14px;
+  background: var(--white); box-shadow: 0 10px 24px -20px rgba(8,49,72,.5);
+  font-family: var(--f-display); font-size: 1.2rem; line-height: 1; color: var(--navy);
+  transition: background .5s var(--ease), color .5s var(--ease), transform .5s var(--ease);
+}
+.pills span::before {
+  content: ""; flex: none; width: 18px; height: 18px; border-radius: 50%; background: var(--wine)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EFECE7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4L18 8'/%3E%3C/svg%3E") center / 12px no-repeat;
+  transition: background-color .5s var(--ease);
+}
+.pills span:hover { background: var(--wine); color: var(--ice); }
+.pills span:hover::before { background-color: var(--navy); }
 .clinic__ctas { display: flex; flex-wrap: wrap; gap: .8rem; }
 .map { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 4.4; background: var(--sand); }
 .map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.85) sepia(.12); transition: filter .7s var(--ease); }
@@ -336,7 +353,7 @@ p { margin: 0 0 1em; }
   .hero-photo { justify-self: center; max-width: 400px; margin-top: 1rem; }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
   .arch--about { justify-self: center; width: 100%; max-width: 380px; }
-  .arch--moms { justify-self: center; order: -1; max-width: 340px; }
+  .arch--moms { justify-self: center; order: -1; max-width: 340px; height: auto; min-height: 0; aspect-ratio: 3 / 4; }
   .audience__grid, .reviews__grid { grid-template-columns: 1fr 1fr; }
   .services__grid { grid-template-columns: 1fr 1fr; }
   .also { grid-template-columns: 1fr 1fr; }
@@ -351,7 +368,7 @@ p { margin: 0 0 1em; }
   .hero__title { font-size: clamp(2.5rem, 12vw, 3.3rem); }
   .hero__ctas .btn { flex: 1 1 100%; justify-content: space-between; }
   .hero-photo { max-width: 300px; }
-  .hero-photo__outline { transform: translate(14px, 14px); }
+  .hero-photo__outline { inset: 14px -14px -14px 14px; }
   .hero-photo__chip { left: 0; right: 0; margin: 0 auto; width: max-content; bottom: 1.2rem; white-space: nowrap; }
   .audience__grid, .services__grid, .reviews__grid, .also, .checks, .footer__grid { grid-template-columns: 1fr; }
   .aud-card__in { min-height: 0; }
@@ -386,7 +403,7 @@ p { margin: 0 0 1em; }
 .badge--3 { bottom: 0; right: 14%; }
 
 /* ================= LISTA COMPLETA DE ATENDIMENTOS (ref. ApexCare) ================= */
-.svc-list { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 5vw, 5rem); margin-top: clamp(4rem, 8vw, 6rem); align-items: start; }
+.svc-list { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 5vw, 5rem); margin-top: var(--section); align-items: start; }
 .svc-list__title { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 1.6rem; }
 .rows { list-style: none; padding: 0; margin: 0; counter-reset: none; }
 .rows li { border-top: 1px solid var(--line); }
@@ -432,4 +449,10 @@ p { margin: 0 0 1em; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .js .reveal-up, .js .reveal-fade { opacity: 1; }
+}
+
+/* convênios em 2 colunas no celular */
+@media (max-width: 640px) {
+  .pills { grid-template-columns: repeat(2, 1fr); }
+  .info__row dd.pills { margin-left: 0; }
 }

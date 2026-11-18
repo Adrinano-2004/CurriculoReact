@@ -14,6 +14,13 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
+  // Ao recarregar, a página sempre volta ao topo: o navegador não pula para o meio
+  // enquanto a abertura ainda está animando (era isso que fazia a foto travar)
+  if (animate && !location.hash) {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }
+
   /* ---------- WhatsApp ---------- */
   $$(".js-whats").forEach((el) => {
     el.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(el.dataset.msg || WHATSAPP_MSG)}`;
@@ -156,19 +163,21 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
   // foto inteira: o arco se abre de baixo para cima e a foto assenta (zoom suave)
   tl.fromTo(".hero-photo__frame", { clipPath: "inset(100% 0% 0% 0% round 999px 999px 18px 18px)" },
       { clipPath: "inset(0% 0% 0% 0% round 999px 999px 18px 18px)", duration: 1.6, ease: "expo.inOut" }, 0.1)
-    .from(".hero-photo__frame img", { scale: 1.25, duration: 2.2, ease: EASE }, 0.2)
-    .from(".hero-photo__outline", { opacity: 0, x: -18, y: -18, duration: 1.4, ease: EASE }, 0.9);
+    .from(".hero-photo__frame img", { scale: 1.2, duration: 2, ease: EASE }, 0.2)
+    // a entrada do contorno mexe só na opacidade; o movimento vertical fica só com o scroll
+    // (antes as duas animações disputavam a mesma propriedade e a foto "travava")
+    .from(".hero-photo__outline", { opacity: 0, duration: 1.2, ease: "power2.out" }, 0.9);
 
-  // parallax leve: a foto e o contorno andam em velocidades diferentes
-  gsap.fromTo(".hero-photo__frame img", { yPercent: -8 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
-  gsap.to(".hero-photo__outline", { y: () => (innerWidth < 1020 ? -10 : -50), ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  // parallax leve: a foto e o contorno andam em velocidades diferentes (scrub suavizado)
+  gsap.fromTo(".hero-photo__frame img", { yPercent: -8 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 } });
+  gsap.fromTo(".hero-photo__outline", { y: 0 }, { y: () => (innerWidth < 1020 ? -10 : -40), ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6, invalidateOnRefresh: true } });
 
   /* ---------- Faixa de condições: anda com o scroll (para frente e para trás) ---------- */
   gsap.fromTo(".marquee__track", { xPercent: 0 }, {
     xPercent: -35, ease: "none",
     scrollTrigger: { trigger: ".marquee", start: "top bottom", end: "bottom top", scrub: 0.6 },
   });
-  gsap.to(".hero__text", { yPercent: 10, opacity: 0.3, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  gsap.to(".hero__text", { yPercent: 10, opacity: 0.3, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 } });
 
   /* ---------- Manifesto: as palavras "acendem" conforme o scroll ---------- */
   $$(".js-manifesto").forEach((el) => {
@@ -257,7 +266,7 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
   gsap.from(".checks path", { strokeDashoffset: 24, duration: 0.6, ease: "power2.out", stagger: 0.08, delay: 0.3, scrollTrigger: { trigger: ".checks", start: "top 85%", once: true } });
 
   /* ---------- Convênios ---------- */
-  gsap.from(".pills span", { scale: 0.6, opacity: 0, duration: 0.7, ease: "back.out(2)", stagger: 0.05, scrollTrigger: { trigger: ".pills", start: "top 90%", once: true } });
+  gsap.from(".pills span", { y: 14, opacity: 0, duration: 0.8, ease: "power2.out", stagger: 0.05, clearProps: "transform", scrollTrigger: { trigger: ".pills", start: "top 90%", once: true } });
 
   /* ---------- Seções com cantos que se abrem ao entrar ---------- */
   [".final"].forEach((sel) => {

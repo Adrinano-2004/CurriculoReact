@@ -6,13 +6,21 @@
   <title>Dra. Alice Werneck | Otorrinolaringologista em Juiz de Fora</title>
   <meta name="description" content="Respirar bem, ouvir bem, viver bem. Otorrinolaringologista e alergologista em Juiz de Fora: cirurgia de amígdala, teste de alergia, audiometria, ronco, tontura e alergias, para crianças, adultos e idosos." />
   <meta name="theme-color" content="#EFECE7" />
-  <script>document.documentElement.classList.add("js")</script>
+  <script>
+    document.documentElement.classList.add("js");
+    // ao recarregar, volta para o topo (o navegador não pula para o meio durante a abertura)
+    if ("scrollRestoration" in history && !location.hash) history.scrollRestoration = "manual";
+  </script>
+  <meta property="og:title" content="Dra. Alice Werneck | Otorrinolaringologista em Juiz de Fora" />
+  <meta property="og:description" content="Respirar bem, ouvir bem, viver bem. Atendimento humanizado para crianças, adultos e idosos." />
+  <meta property="og:image" content="https://adrinano-2004.github.io/dra-alice-werneck/site-alice-werneck/assets/alice-retrato-hero.webp" />
+  <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="assets/alice-retrato-hero.webp" />
-  <link rel="stylesheet" href="css/style.css?v=202611181832" />
+  <link rel="stylesheet" href="css/style.css?v=202611181841" />
 </head>
 <body>
 
@@ -409,6 +417,6 @@
   <script src="js/vendor/gsap.min.js"></script>
   <script src="js/vendor/ScrollTrigger.min.js"></script>
   <script src="js/vendor/lenis.min.js"></script>
-  <script src="js/main.js?v=202611181832"></script>
+  <script src="js/main.js?v=202611181841"></script>
 </body>
 </html>
