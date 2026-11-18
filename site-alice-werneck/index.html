@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="assets/alice-retrato-hero.webp" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=202611181832" />
 </head>
 <body>
 
@@ -73,7 +73,6 @@
           <div class="hero-photo__frame">
             <img src="assets/alice-retrato-hero.webp" alt="Retrato da Dra. Alice Werneck sorrindo, em fundo neutro" />
           </div>
-          <p class="hero-photo__chip"><span class="dot"></span>Atendimento em Juiz&nbsp;de&nbsp;Fora</p>
         </figure>
       </div>
     </section>
@@ -82,19 +81,19 @@
     <section class="stats" aria-label="Formação e experiência">
       <div class="container stats__grid">
         <div class="stat">
-          <p class="stat__value"><span class="js-scramble" data-text="PUC-Rio">PUC-Rio</span></p>
+          <p class="stat__value">PUC-Rio</p>
           <p class="stat__label">Especialização em Otorrinolaringologia</p>
         </div>
         <div class="stat">
-          <p class="stat__value"><span class="js-scramble" data-text="ABORL-CCF">ABORL-CCF</span></p>
+          <p class="stat__value">ABORL-CCF</p>
           <p class="stat__label">Título de especialista</p>
         </div>
         <div class="stat">
-          <p class="stat__value"><span class="js-scramble" data-text="Foniatria">Foniatria</span></p>
+          <p class="stat__value">Foniatria</p>
           <p class="stat__label">Formação complementar em voz e&nbsp;fala</p>
         </div>
         <div class="stat">
-          <p class="stat__value"><span class="js-scramble" data-text="Alergologia">Alergologia</span></p>
+          <p class="stat__value">Alergologia</p>
           <p class="stat__label">Asma, rinite e doenças&nbsp;alérgicas</p>
         </div>
       </div>
@@ -195,6 +194,14 @@
         </div>
 
         <div class="services__grid">
+          <a href="#" class="svc hover-card js-whats" data-msg="Olá! Gostaria de agendar uma audiometria."><div class="svc__card">
+            <img class="svc__img" src="assets/alice-exame-ouvido.webp" alt="Dra. Alice Werneck examina o ouvido de uma paciente" loading="lazy" />
+            <div class="svc__body">
+              <h3 class="svc__title">Audiometria</h3>
+              <p class="svc__desc">Avaliação da audição, da criança ao idoso, com acompanhamento de&nbsp;perto.</p>
+              <span class="svc__more">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </div></a>
           <a href="#" class="svc hover-card js-whats" data-msg="Olá! Gostaria de saber sobre a cirurgia de amígdala."><div class="svc__card">
             <img class="svc__img" src="assets/alice-cirurgia.webp" alt="Dra. Alice Werneck durante procedimento cirúrgico" loading="lazy" />
             <div class="svc__body">
@@ -211,14 +218,6 @@
               <span class="svc__more">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </div>
           </div></a>
-          <a href="#" class="svc hover-card js-whats" data-msg="Olá! Gostaria de agendar uma audiometria."><div class="svc__card">
-            <img class="svc__img" src="assets/alice-exame-ouvido.webp" alt="Dra. Alice Werneck examina o ouvido de uma paciente" loading="lazy" />
-            <div class="svc__body">
-              <h3 class="svc__title">Audiometria</h3>
-              <p class="svc__desc">Avaliação da audição, da criança ao idoso, com acompanhamento de&nbsp;perto.</p>
-              <span class="svc__more">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </div>
-          </div></a>
         </div>
 
         <!-- Lista completa (ref. ApexCare): passar o mouse troca a foto ao lado -->
@@ -226,9 +225,9 @@
           <div class="svc-list__col">
             <h3 class="svc-list__title">Todos os atendimentos</h3>
             <ol class="rows">
-              <li><a href="#" class="row js-whats" data-img="assets/alice-cirurgia.webp" data-msg="Olá! Gostaria de saber sobre a cirurgia de amígdala e adenoide."><span class="row__n">01</span><span class="row__t">Cirurgia de amígdala e&nbsp;adenoide</span><svg class="row__a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg><span class="row__d"><span>Para infecções de garganta repetidas, ronco e apneia, em crianças e&nbsp;adultos.</span></span></a></li>
-              <li><a href="#" class="row js-whats" data-img="assets/alice-teste-alergia.webp" data-msg="Olá! Gostaria de saber sobre o teste de alergia."><span class="row__n">02</span><span class="row__t">Teste de&nbsp;alergia</span><svg class="row__a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg><span class="row__d"><span>Identifica o que desencadeia rinite, asma e crises alérgicas, feito no próprio&nbsp;consultório.</span></span></a></li>
-              <li><a href="#" class="row js-whats" data-img="assets/alice-exame-ouvido.webp" data-msg="Olá! Gostaria de agendar uma audiometria."><span class="row__n">03</span><span class="row__t">Audiometria</span><svg class="row__a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg><span class="row__d"><span>Avaliação completa da audição, da criança ao idoso, com acompanhamento de&nbsp;perto.</span></span></a></li>
+              <li><a href="#" class="row js-whats" data-img="assets/alice-exame-ouvido.webp" data-msg="Olá! Gostaria de agendar uma audiometria."><span class="row__n">01</span><span class="row__t">Audiometria</span><svg class="row__a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg><span class="row__d"><span>Avaliação completa da audição, da criança ao idoso, com acompanhamento de&nbsp;perto.</span></span></a></li>
+              <li><a href="#" class="row js-whats" data-img="assets/alice-cirurgia.webp" data-msg="Olá! Gostaria de saber sobre a cirurgia de amígdala e adenoide."><span class="row__n">02</span><span class="row__t">Cirurgia de amígdala e&nbsp;adenoide</span><svg class="row__a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg><span class="row__d"><span>Para infecções de garganta repetidas, ronco e apneia, em crianças e&nbsp;adultos.</span></span></a></li>
+              <li><a href="#" class="row js-whats" data-img="assets/alice-teste-alergia.webp" data-msg="Olá! Gostaria de saber sobre o teste de alergia."><span class="row__n">03</span><span class="row__t">Teste de&nbsp;alergia</span><svg class="row__a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg><span class="row__d"><span>Identifica o que desencadeia rinite, asma e crises alérgicas, feito no próprio&nbsp;consultório.</span></span></a></li>
               <li><a href="#" class="row js-whats" data-img="assets/alice-maes.webp" data-msg="Olá! Gostaria de saber sobre tratamento para ronco e apneia do sono."><span class="row__n">04</span><span class="row__t">Ronco e apneia do&nbsp;sono</span><svg class="row__a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg><span class="row__d"><span>Investigação da causa e tratamento clínico ou cirúrgico para voltar a dormir&nbsp;bem.</span></span></a></li>
               <li><a href="#" class="row js-whats" data-img="assets/alice-teste-alergia.webp" data-msg="Olá! Gostaria de saber sobre tratamento para rinite e sinusite."><span class="row__n">05</span><span class="row__t">Rinite e&nbsp;sinusite</span><svg class="row__a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg><span class="row__d"><span>Nariz entupido, espirros e dor no rosto tratados pela causa, para respirar melhor no&nbsp;dia&nbsp;a&nbsp;dia.</span></span></a></li>
               <li><a href="#" class="row js-whats" data-img="assets/alice-retrato-oficial.webp" data-msg="Olá! Gostaria de saber sobre tratamento para asma e alergias."><span class="row__n">06</span><span class="row__t">Asma e doenças&nbsp;alérgicas</span><svg class="row__a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg><span class="row__d"><span>Acompanhamento da asma e das alergias respiratórias, com plano de controle das&nbsp;crises.</span></span></a></li>
@@ -241,7 +240,7 @@
             </ol>
           </div>
           <figure class="svc-list__media" aria-hidden="true">
-            <img id="svcImg" src="assets/alice-cirurgia.webp" alt="" loading="lazy" />
+            <img id="svcImg" src="assets/alice-exame-ouvido.webp" alt="" loading="lazy" />
             <img id="svcImg2" src="assets/alice-cirurgia.webp" alt="" loading="lazy" />
           </figure>
         </div>
@@ -410,6 +409,6 @@
   <script src="js/vendor/gsap.min.js"></script>
   <script src="js/vendor/ScrollTrigger.min.js"></script>
   <script src="js/vendor/lenis.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=202611181832"></script>
 </body>
 </html>

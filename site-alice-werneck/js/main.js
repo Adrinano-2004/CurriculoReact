@@ -157,8 +157,7 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
   tl.fromTo(".hero-photo__frame", { clipPath: "inset(100% 0% 0% 0% round 999px 999px 18px 18px)" },
       { clipPath: "inset(0% 0% 0% 0% round 999px 999px 18px 18px)", duration: 1.6, ease: "expo.inOut" }, 0.1)
     .from(".hero-photo__frame img", { scale: 1.25, duration: 2.2, ease: EASE }, 0.2)
-    .from(".hero-photo__outline", { opacity: 0, x: -18, y: -18, duration: 1.4, ease: EASE }, 0.9)
-    .from(".hero-photo__chip", { opacity: 0, y: 16, duration: 1, ease: EASE }, 1.2);
+    .from(".hero-photo__outline", { opacity: 0, x: -18, y: -18, duration: 1.4, ease: EASE }, 0.9);
 
   // parallax leve: a foto e o contorno andam em velocidades diferentes
   gsap.fromTo(".hero-photo__frame img", { yPercent: -8 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
@@ -212,12 +211,6 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
     gsap.fromTo($("img", arch), { yPercent: -10 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: arch, start: "top bottom", end: "bottom top", scrub: true } });
   });
 
-  /* ---------- Credenciais: letras decodificando ---------- */
-  ScrollTrigger.create({
-    trigger: ".stats", start: "top 82%", once: true,
-    onEnter: () => $$(".js-scramble").forEach((el, i) => scramble(el, el.dataset.text, i * 0.15)),
-  });
-
   /* ---------- Números: o bloco aparece com um fade simples e os números contam ---------- */
   gsap.from(".numbers", { opacity: 0, y: 20, duration: 1, ease: "power2.out", scrollTrigger: { trigger: ".numbers", start: "top 85%", once: true } });
   ScrollTrigger.create({
@@ -227,17 +220,8 @@ const WHATSAPP_MSG = "Olá! Gostaria de agendar uma consulta com a Dra. Alice We
       gsap.to(o, { v: +el.dataset.to, duration: 1.8, ease: "power2.out", onUpdate: () => (el.textContent = Math.round(o.v)) });
     }),
   });
-  gsap.from(".stat", { y: 24, opacity: 0, duration: 1.1, ease: EASE, stagger: 0.1, scrollTrigger: { trigger: ".stats", start: "top 86%", once: true } });
-
-  function scramble(el, text, delay) {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    let frame = 0; const total = 24;
-    setTimeout(function tick() {
-      const p = frame / total;
-      el.textContent = [...text].map((c, i) => (c === "-" || c === " " || i < p * text.length ? c : chars[(Math.random() * 26) | 0])).join("");
-      if (frame++ < total) setTimeout(tick, 32); else el.textContent = text;
-    }, delay * 1000);
-  }
+  /* ---------- Credenciais: fade simples ---------- */
+  gsap.from(".stats", { opacity: 0, y: 16, duration: 1, ease: "power2.out", scrollTrigger: { trigger: ".stats", start: "top 90%", once: true } });
 
   /* ---------- Cards entrando em sequência ---------- */
   /* ---------- Órbitas girando devagar + ícones flutuando ---------- */

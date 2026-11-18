@@ -157,12 +157,11 @@ p { margin: 0 0 1em; }
 @keyframes ping { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(3); opacity: 0; } }
 
 /* ================= STATS ================= */
-.stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stats { background: var(--ice); }
 .stats__grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-.stat { padding: clamp(1.8rem, 4vw, 3rem) clamp(1rem, 2.4vw, 2rem); position: relative; }
-.stat + .stat::before { content: ""; position: absolute; left: 0; top: 28%; bottom: 28%; width: 1px; background: var(--line); }
+.stat { padding: clamp(1.8rem, 4vw, 3rem) clamp(.5rem, 1.5vw, 1rem); position: relative; text-align: center; }
 .stat__value { font-family: var(--f-display); font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--wine); line-height: 1.1; margin-bottom: .35em; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.stat__label { font-size: .86rem; color: var(--muted); margin: 0; max-width: 24ch; }
+.stat__label { font-size: .86rem; color: var(--muted); margin: 0 auto; max-width: 24ch; }
 
 /* ================= MANIFESTO ================= */
 .manifesto { padding: var(--section) 0 0; }
@@ -209,7 +208,7 @@ p { margin: 0 0 1em; }
 .aud-card:hover .aud-card__index, .aud-card.is-active .aud-card__index { color: var(--sand); }
 
 /* ================= MARQUEE ================= */
-.marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1.3rem 0; }
+.marquee { overflow: hidden; padding: 1.3rem 0; background: var(--ice); }
 .marquee__track { display: flex; align-items: center; gap: 2.2rem; width: max-content; will-change: transform; }
 .marquee__track span { font-family: var(--f-display); font-size: clamp(1.6rem, 3vw, 2.4rem); color: var(--navy); white-space: nowrap; font-style: italic; }
 .marquee__track i { width: 7px; height: 7px; border-radius: 50%; background: var(--wine); flex: none; }
@@ -246,7 +245,7 @@ p { margin: 0 0 1em; }
 .also__item:hover svg { color: var(--ice); transform: translateX(4px); }
 
 /* ================= PARA AS MÃES ================= */
-.moms { padding: var(--section) 0; border-top: 1px solid var(--line); }
+.moms { padding: var(--section) 0; background: var(--ice); }
 .moms__title { margin-bottom: clamp(2rem, 4vw, 3rem); }
 .moms__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
 .moms__text .section-title { margin-bottom: 1.4rem; }
@@ -336,8 +335,6 @@ p { margin: 0 0 1em; }
   .hero__grid, .about__grid, .moms__grid, .clinic__grid, .faq__wrap { grid-template-columns: 1fr; }
   .hero-photo { justify-self: center; max-width: 400px; margin-top: 1rem; }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
-  .stat:nth-child(3)::before { display: none; }
-  .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
   .arch--about { justify-self: center; width: 100%; max-width: 380px; }
   .arch--moms { justify-self: center; order: -1; max-width: 340px; }
   .audience__grid, .reviews__grid { grid-template-columns: 1fr 1fr; }
@@ -366,7 +363,9 @@ p { margin: 0 0 1em; }
 /* ================= NÚMEROS GRANDES (ref. medical.framer.media) ================= */
 .numbers { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.2rem, 3vw, 3rem); margin-top: clamp(4rem, 9vw, 7rem); }
 .manifesto .numbers { margin-top: 0; }
-.num { position: relative; }
+/* números centralizados em cada coluna, alinhados com o resto da página */
+.num { position: relative; text-align: center; }
+.num__label { margin-left: auto !important; margin-right: auto !important; }
 .num__value { font-family: var(--f-body); font-weight: 400; font-size: clamp(2.6rem, 4.6vw, 3.8rem); line-height: 1; letter-spacing: -.04em; color: var(--navy); margin: 0 0 1rem; font-variant-numeric: tabular-nums; }
 .num__value sup { font-size: .6em; vertical-align: .55em; margin-left: .04em; color: var(--wine); letter-spacing: 0; }
 .num__label { font-size: .92rem; color: var(--muted); margin: 0; max-width: 24ch; }
