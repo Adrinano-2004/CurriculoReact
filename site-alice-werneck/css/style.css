@@ -480,9 +480,9 @@ p { margin: 0 0 1em; }
     display: flex; flex-direction: column; position: fixed; top: 0; right: 0; bottom: 0; z-index: 80;
     width: min(84vw, 360px); padding: 1.2rem 1.6rem 2rem; background: var(--ice);
     box-shadow: -30px 0 60px -30px rgba(8, 49, 72, .45);
-    transform: translateX(100%); transition: transform .6s var(--ease); visibility: hidden;
+    clip-path: inset(0 0 0 100%); transition: clip-path .6s var(--ease), visibility 0s .6s; visibility: hidden;
   }
-  .drawer.is-open { transform: none; visibility: visible; }
+  .drawer.is-open { clip-path: inset(0 0 0 0); visibility: visible; transition: clip-path .6s var(--ease); }
   .drawer-overlay.is-open { opacity: 1; pointer-events: auto; }
   .drawer__top { display: flex; align-items: center; justify-content: space-between; }
   .drawer__logo { width: 120px; margin: 0; }
@@ -509,3 +509,16 @@ p { margin: 0 0 1em; }
   .section-title { font-size: clamp(2.3rem, 10.5vw, 2.7rem); line-height: 1.04; text-wrap: balance; }
   .services__head { gap: .9rem; margin-bottom: 2rem; }
 }
+
+/* Trava a rolagem lateral no celular (iPhone deixava arrastar a página para o lado) */
+html, body { overflow-x: hidden; overflow-x: clip; max-width: 100%; }
+body { position: relative; touch-action: pan-y pinch-zoom; }
+.footer, .footer__big { max-width: 100%; overflow: hidden; }
+@media (max-width: 640px) {
+  .orbit { inset: -2% 0; width: 100%; }
+  .stats__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat { min-width: 0; }
+  .stat__value { font-size: clamp(1.5rem, 7vw, 2rem); white-space: normal; }
+}
+
+.about { overflow: hidden; overflow: clip; }
